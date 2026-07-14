@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arastu Thakur | root@ai-portfolio:~</title>
+    <style>
+        :root {
+            --bg-color: #0a0c10;
+            --term-bg: #111318;
+            --text-color: #a9b1d6;
+            --accent-green: #9ece6a;
+            --accent-cyan: #7dcfff;
+            --accent-purple: #bb9af7;
+            --accent-yellow: #e0af68;
+            --accent-red: #f7768e;
+            --font-mono: 'Fira Code', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.6;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* CRT Scanline & Glow Effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 10;
+            background-size: 100% 3px, 4px 100%;
+            pointer-events: none;
+        }
+
+        .terminal-window {
+            width: 95%;
+            max-width: 1000px;
+            height: 92vh;
+            background-color: var(--term-bg);
+            border: 1px solid #2a2e3a;
+            border-radius: 10px;
+            box-shadow: 0 0 40px rgba(125, 207, 255, 0.08), 0 25px 60px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background-color: #1a1d24;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #2a2e3a;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .terminal-buttons { display: flex; gap: 8px; }
+        .btn { width: 13px; height: 13px; border-radius: 50%; }
+        .btn-red { background-color: #ff5f57; box-shadow: 0 0 4px #ff5f57; }
+        .btn-yellow { background-color: #febc2e; box-shadow: 0 0 4px #febc2e; }
+        .btn-green { background-color: #28c840; box-shadow: 0 0 4px #28c840; }
+
+        .terminal-title {
+            margin-left: 16px;
+            color: #565f71;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .terminal-body {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+
+        .terminal-body::-webkit-scrollbar { width: 8px; }
+        .terminal-body::-webkit-scrollbar-track { background: var(--term-bg); }
+        .terminal-body::-webkit-scrollbar-thumb { background: #2a2e3a; border-radius: 4px; }
+
+        .output-line { margin-bottom: 6px; white-space: pre-wrap; word-wrap: break-word; }
+        .prompt { color: var(--accent-green); font-weight: bold; }
+        .command { color: var(--text-color); }
+        
+        .input-line {
+            display: flex;
+            align-items: center;
+            padding: 0 24px 24px 24px;
+        }
+
+        .input-field {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            flex: 1;
+            outline: none;
+            margin-left: 8px;
+            caret-color: var(--accent-green);
+        }
+
+        /* Syntax Highlighting Classes */
+        .kw { color: var(--accent-purple); font-weight: bold; }
+        .str { color: var(--accent-green); }
+        .func { color: var(--accent-cyan); }
+        .num { color: var(--accent-yellow); }
+        .comment { color: #565f71; font-style: italic; }
+        .link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px dashed var(--accent-cyan); transition: all 0.2s; }
+        .link:hover { color: var(--accent-green); border-bottom-style: solid; }
+        .highlight { color: var(--accent-yellow); font-weight: bold; }
+        .error { color: var(--accent-red); }
+        .bold { font-weight: bold; }
+
+        /* Robust ASCII Art Container */
+        .ascii-art {
+            color: var(--accent-cyan);
+            font-size: 12px;
+            line-height: 1.1;
+            margin: 16px 0;
+            font-weight: bold;
+            white-space: pre; /* Guarantees ASCII alignment */
+            overflow-x: auto;
+        }
+
+        .neofetch-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 8px 24px;
+            margin: 12px 0;
+        }
+        .neofetch-label { color: var(--accent-purple); font-weight: bold; min-width: 140px; }
+        .neofetch-value { color: var(--text-color); }
+
+        .tree-line { color: #565f71; }
+
+        @media (max-width: 768px) {
+            .ascii-art { font-size: 8px; }
+            body { font-size: 12px; }
+            .input-field { font-size: 12px; }
+            .terminal-body { padding: 16px; }
+            .input-line { padding: 0 16px 16px 16px; }
+            .neofetch-grid { grid-template-columns: 1fr; gap: 4px; }
+            .neofetch-label { min-width: auto; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="terminal-window">
+    <div class="terminal-header">
+        <div class="terminal-buttons">
+            <div class="btn btn-red"></div>
+            <div class="btn btn-yellow"></div>
+            <div class="btn btn-green"></div>
+        </div>
+        <div class="terminal-title">arastu@intel: ~/agentic-portfolio (main)</div>
+    </div>
+    <div class="terminal-body" id="terminal-body"></div>
+    <div class="input-line" id="input-line" style="display: none;">
+        <span class="prompt">arastu@intel:~$</span>
+        <input type="text" class="input-field" id="command-input" autocomplete="off" autofocus spellcheck="false">
+    </div>
+</div>
+
+<script>
+    const terminalBody = document.getElementById('terminal-body');
+    const commandInput = document.getElementById('command-input');
+    const inputLine = document.getElementById('input-line');
+
+    // Deeply researched and expanded data
+const portfolioData = {
+    neofetch: `<span class="ascii-art">
+      █████╗ ██████╗  █████╗ ███████╗████████╗██╗   ██╗
+     ██╔══██╗██╔══██╗██╔══██╗██╔════╝╚══██╔══╝██║   ██║
+     ███████║██████╔╝███████║███████╗   ██║   ██║   ██║
+     ██╔══██║██╔══██╗██╔══██║╚════██║   ██║   ██║   ██║
+     ██║  ██║██║  ██║██║  ██║███████║   ██║   ╚██████╔╝
+     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝   ╚═╝    ╚═════╝
+
+              ████████╗██╗  ██╗ █████╗ ██╗  ██╗██╗   ██╗██████╗
+              ╚══██╔══╝██║  ██║██╔══██╗██║ ██╔╝██║   ██║██╔══██╗
+                 ██║   ███████║███████║█████╔╝ ██║   ██║██████╔╝
+                 ██║   ██╔══██║██╔══██║██╔═██╗ ██║   ██║██╔══██╗
+                 ██║   ██║  ██║██║  ██║██║  ██╗╚██████╔╝██║  ██║
+                 ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝
+
+                         Arastu Thakur
+                 AI Engineer • ML Engineer • Researcher
+</span>
+<div class="neofetch-grid">
+    <span class="neofetch-label">OS</span><span class="neofetch-value">Intel AI Infrastructure (Ubuntu 22.04 LTS)</span>
+    <span class="neofetch-label">Host</span><span class="neofetch-value">Jain University (B.Tech CS, Gold Medalist, GPA: 9.757/10)</span>
+    <span class="neofetch-label">Uptime</span><span class="neofetch-value">1.5+ Years Production ML @ Intel</span>
+    <span class="neofetch-label">Packages</span><span class="neofetch-value"><span class="highlight">Multiple SCIE Publications</span> (Highest IF: 10.9)</span>
+    <span class="neofetch-label">Shell</span><span class="neofetch-value">zsh 5.8.1 (agentic-workflow-theme)</span>
+    <span class="neofetch-label">Scholarship</span><span class="neofetch-value">Full-tuition "Study in India" (Top 5% of 10k+)</span>
+    <span class="neofetch-label">Awards</span><span class="neofetch-value">1st Runner-Up, JAIN x Honeywell Hackathon 2024</span>
+    <span class="neofetch-label">Colors</span><span class="neofetch-value"><span style="color:#f7768e">■</span> <span style="color:#e0af68">■</span> <span style="color:#9ece6a">■</span> <span style="color:#7dcfff">■</span> <span style="color:#bb9af7">■</span></span>
+</div>`,
+
+        about: `<span class="kw">class</span> <span class="func">ArastuThakur</span>(<span class="func">DataScientist</span>, <span class="func">Researcher</span>):
+    <span class="kw">def</span> <span class="func">__init__</span>(self):
+        self.name = <span class="str">"Arastu Thakur"</span>
+        self.current_role = <span class="str">"Data Scientist @ Intel Corporation, Bengaluru"</span>
+        self.specialization = [
+            <span class="str">"Generative AI & Agentic Systems"</span>,
+            <span class="str">"Production ML Engineering & MLOps"</span>,
+            <span class="str">"Deep Learning & Statistical Analytics"</span>
+        ]
+        self.education = <span class="str">"B.Tech Computer Science, Jain (Deemed-to-be) University"</span>
+        self.gpa = <span class="num">9.757</span> <span class="comment"># Gold Medalist</span>
+        self.mission = <span class="str">"Architecting scalable, retrieval-based AI pipelines and multi-agent workflows that bridge the gap between academic research and production-grade engineering."</span>
+        
+    <span class="kw">def</span> <span class="func">get_leadership</span>(self):
+        <span class="kw">return</span> <span class="str">"Microsoft Student Ambassador: Mentoring students in AI and software engineering initiatives."</span>`,
+
+        experience: `<span class="kw">def</span> <span class="func">get_experience</span>(self) -> <span class="kw">list</span>[<span class="kw">dict</span>]:
+    <span class="kw">return</span> [
+        {
+            <span class="str">"role"</span>: <span class="str">"Data Scientist"</span>,
+            <span class="str">"company"</span>: <span class="str">"Intel Corporation, Bengaluru"</span>,
+            <span class="str">"period"</span>: <span class="str">"Jun 2025 – Present"</span>,
+            <span class="str">"impact"</span>: [
+                <span class="str">"Developed AI-driven automation & deep learning-based encoder solutions for defect reduction."</span>,
+                <span class="str">"Achieved ~94% validation accuracy, improving testing efficiency by 10%."</span>,
+                <span class="str">"Built/maintained production ML automation & SQL-based big data analytics systems."</span>,
+                <span class="str">"Supporting 20+ users and processing ~1,000+ queries daily across engineering workflows."</span>
+            ]
+        },
+        {
+            <span class="str">"role"</span>: <span class="str">"Graduate Technical Intern"</span>,
+            <span class="str">"company"</span>: <span class="str">"Intel Corporation, Bengaluru"</span>,
+            <span class="str">"period"</span>: <span class="str">"Jul 2024 – Jun 2025"</span>,
+            <span class="str">"impact"</span>: [
+                <span class="str">"Developed AI-powered automation bots and debugging utilities."</span>,
+                <span class="str">"Reduced repetitive validation efforts by ~30% and improved diagnostics accuracy."</span>,
+                <span class="str">"Migrated and optimized 1,200+ validation test cases."</span>,
+                <span class="str">"Supported SQL-driven big data analytics and reporting pipelines for large-scale validation."</span>
+            ]
+        }
+    ]`,
+
+        research: `<span class="comment"># Academic Footprint: 3+ years of research experience, multiple publications</span>
+<span class="kw">def</span> <span class="func">get_research</span>(self) -> <span class="kw">list</span>[<span class="kw">dict</span>]:
+    <span class="kw">return</span> [
+        {
+            <span class="str">"focus"</span>: <span class="str">"Medical Imaging & Deep Learning"</span>,
+            <span class="str">"detail"</span>: <span class="str">"Published research on brain tumor classification in MRI scans and transformative breast cancer diagnosis using CNNs."</span>,
+            <span class="str">"venues"</span>: [<span class="str">"Frontiers in Computational Neuroscience"</span>, <span class="str">"PMC/SCIE Journals"</span>]
+        },
+        {
+            <span class="str">"focus"</span>: <span class="str">"Advanced Consumer Electronics AI"</span>,
+            <span class="str">"detail"</span>: <span class="str">"Contributor to high-impact research revolutionizing consumer electronics via AI."</span>,
+            <span class="str">"venue"</span>: <span class="str">"IEEE Transactions on Consumer Electronics"</span>,
+            <span class="str">"impact_factor"</span>: <span class="num">10.9</span> <span class="comment"># Highest impact factor publication</span>
+        },
+        {
+            <span class="str">"focus"</span>: <span class="str">"Sustainable Computing"</span>,
+            <span class="str">"detail"</span>: <span class="str">"Research on 'AgriFusion: A Low-Carbon Sustainable Computing' framework."</span>,
+            <span class="str">"venue"</span>: <span class="str">"Wiley (SCIE)"</span>
+        }
+    ]`,
+
+        projects: `<span class="kw">def</span> <span class="func">get_projects</span>(self) -> <span class="kw">list</span>[<span class="kw">dict</span>]:
+    <span class="kw">return</span> [
+        {
+            <span class="str">"name"</span>: <span class="str">"Ever Ready to Release (Intel Internal)"</span>,
+            <span class="str">"stack"</span>: [<span class="str">"Python"</span>, <span class="str">"C++"</span>, <span class="str">"LangChain"</span>, <span class="str">"LLMs"</span>, <span class="str">"Vector DBs"</span>, <span class="str">"MLflow"</span>],
+            <span class="str">"result"</span>: <span class="str">"Architected LLM-powered retrieval workflow mapping code changes to validation test cases. Reduced validation time by 30% and infrastructure usage by ~20%."</span>
+        },
+        {
+            <span class="str">"name"</span>: <span class="str">"AI-Powered Data Analysis & Insights Platform"</span>,
+            <span class="str">"stack"</span>: [<span class="str">"Python"</span>, <span class="str">"Streamlit"</span>, <span class="str">"TensorFlow"</span>, <span class="str">"XGBoost"</span>, <span class="str">"LightGBM"</span>, <span class="str">"Gemini AI"</span>, <span class="str">"Plotly"</span>],
+            <span class="str">"result"</span>: <span class="str">"End-to-end analytics platform integrating ML, DL, and Gemini-powered insight generation for automated EDA, preprocessing, visualization, and hyperparameter optimization."</span>
+        },
+        {
+            <span class="str">"name"</span>: <span class="str">"MRI Image Denoiser"</span>,
+            <span class="str">"stack"</span>: [<span class="str">"TensorFlow"</span>, <span class="str">"Autoencoders"</span>, <span class="str">"Self-Attention Mechanisms"</span>],
+            <span class="str">"result"</span>: <span class="str">"Designed residual autoencoder achieving ~18% PSNR improvement. Optimized inference to <200ms per image for efficient medical deployment."</span>
+        }
+    ]`,
+
+        stack: `<span class="kw">def</span> <span class="func">get_tech_stack</span>(self) -> <span class="kw">str</span>:
+    <span class="kw">return</span> <span class="str">"""
+<span class="tree-line">├──</span> <span class="bold">Languages:</span> Python, C++, SQL
+<span class="tree-line">├──</span> <span class="bold">GenAI & Agentic:</span> LangChain, LangGraph, Multi-Agent Workflows, AI Orchestration, RAG, Embeddings, Vector Search (FAISS, Chroma)
+<span class="tree-line">├──</span> <span class="bold">Deep Learning:</span> PyTorch, TensorFlow, Transformers, Hugging Face, Autoencoders, Attention Mechanisms
+<span class="tree-line">├──</span> <span class="bold">ML & Analytics:</span> Supervised/Unsupervised Learning, Predictive Modeling, Statistical Analysis, Scikit-learn, XGBoost, LightGBM
+<span class="tree-line">├──</span> <span class="bold">MLOps & Systems:</span> Production ML Systems, Model Deployment, Docker, Kubernetes, CI/CD Pipelines, MLflow, REST APIs
+<span class="tree-line">└──</span> <span class="bold">Data Engineering:</span> SQL, Data Processing, Data Cleaning, Feature Engineering, Big Data Analytics
+    """</span>`,
+
+        timeline: `<span class="kw">def</span> <span class="func">get_timeline</span>(self) -> <span class="kw">str</span>:
+    <span class="kw">return</span> <span class="str">"""
+<span class="num">2021</span> <span class="tree-line">│</span> Started B.Tech Computer Science at Jain University.
+<span class="num">2024</span> <span class="tree-line">├──</span> Won 1st Runner-Up at JAIN x Honeywell Hackathon (Fire-Safe Environment).
+<span class="num">2024</span> <span class="tree-line">├──</span> Began Graduate Technical Internship at Intel (Jul 2024).
+<span class="num">2024</span> <span class="tree-line">├──</span> Published multiple SCIE papers (including IEEE Transactions, IF: 10.9).
+<span class="num">2025</span> <span class="tree-line">├──</span> Graduated as <span class="highlight">Gold Medalist</span> (GPA: 9.757/10) with full-tuition "Study in India" Scholarship.
+<span class="num">2025</span> <span class="tree-line">└──</span> Promoted to Data Scientist at Intel (Jun 2025 – Present).
+    """</span>`,
+
+        contact: `<span class="kw">def</span> <span class="func">get_contact</span>(self) -> <span class="kw">dict</span>:
+    <span class="kw">return</span> {
+        <span class="str">"email"</span>: <span class="str">"<a href='mailto:arustuthakur@gmail.com' class='link'>arustuthakur@gmail.com</a>"</span>,
+        <span class="str">"phone"</span>: <span class="str">"+91-9473121221"</span>,
+        <span class="str">"linkedin"</span>: <span class="str">"<a href='https://in.linkedin.com/in/arastuthakur' target='_blank' class='link'>linkedin.com/in/arastuthakur</a>"</span>,
+        <span class="str">"github"</span>: <span class="str">"<a href='https://github.com/arastuthakur' target='_blank' class='link'>github.com/arastuthakur</a>"</span>
+    }`
+    };
+
+    const helpText = `<span class="kw">Available Commands:</span>
+  <span class="func">neofetch</span>    - Display system/profile statistics (Recommended!)
+  <span class="func">about</span>       - Professional summary & background
+  <span class="func">experience</span>  - Detailed work history at Intel Corporation
+  <span class="func">research</span>    - Academic publications & high-impact research
+  <span class="func">projects</span>    - Key ML/GenAI engineering projects & metrics
+  <span class="func">stack</span>       - Visual tree of technical skills & frameworks
+  <span class="func">timeline</span>    - Career and academic progression timeline
+  <span class="func">contact</span>     - Email, LinkedIn, GitHub
+  <span class="func">clear</span>       - Clear the terminal screen
+  <span class="func">sudo</span>        - Attempt privilege escalation
+  <span class="func">exit</span>        - Terminate session`;
+
+    let commandHistory = [];
+    let historyIndex = -1;
+
+    function printLine(html, isCommand = false) {
+        const div = document.createElement('div');
+        div.className = 'output-line';
+        if (isCommand) {
+            div.innerHTML = `<span class="prompt">arastu@intel:~$</span> <span class="command">${html}</span>`;
+        } else {
+            div.innerHTML = html;
+        }
+        terminalBody.appendChild(div);
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
+
+    async function typeBootSequence() {
+        const bootLines = [
+            "BIOS Date: 07/15/2026 14:22:01 Ver 1.0.4",
+            "CPU: Intel(R) Core(TM) i9-14900K @ 6.00GHz",
+            "Detecting primary storage... <span class='str'>[OK]</span>",
+            "Loading Python 3.11.4 environment...",
+            "Importing modules: <span class='func'>torch</span>, <span class='func'>tensorflow</span>, <span class='func'>langchain</span>, <span class='func'>transformers</span>... <span class='str'>[OK]</span>",
+            "Connecting to Intel internal knowledge graph... <span class='str'>[OK]</span>",
+            "Fetching academic records and publication metrics... <span class='str'>[OK]</span>",
+            "Mounting research databases (IEEE, Frontiers, Wiley)... <span class='str'>[OK]</span>",
+            "<span class='highlight'>[SUCCESS]</span> Agentic Portfolio Environment Initialized. Welcome, Arastu."
+        ];
+
+        for (const line of bootLines) {
+            await new Promise(r => setTimeout(r, 300));
+            printLine(`<span class="comment"># ${line}</span>`);
+        }
+        
+        await new Promise(r => setTimeout(r, 500));
+        printLine(portfolioData.neofetch);
+        printLine("\nType '<span class='func'>help</span>' to see available commands.\n");
+        inputLine.style.display = "flex";
+        commandInput.focus();
+    }
+
+    function processCommand(cmd) {
+        const cleanCmd = cmd.trim().toLowerCase();
+        printLine(cleanCmd, true);
+        
+        if (cleanCmd === '') return;
+
+        commandHistory.push(cleanCmd);
+        historyIndex = commandHistory.length;
+
+        switch (cleanCmd) {
+            case 'help':
+                printLine(helpText);
+                break;
+            case 'neofetch':
+                printLine(portfolioData.neofetch);
+                break;
+            case 'about':
+                printLine(portfolioData.about);
+                break;
+            case 'experience':
+                printLine(portfolioData.experience);
+                break;
+            case 'research':
+                printLine(portfolioData.research);
+                break;
+            case 'projects':
+                printLine(portfolioData.projects);
+                break;
+            case 'stack':
+                printLine(portfolioData.stack);
+                break;
+            case 'timeline':
+                printLine(portfolioData.timeline);
+                break;
+            case 'contact':
+                printLine(portfolioData.contact);
+                break;
+            case 'clear':
+                terminalBody.innerHTML = '';
+                break;
+            case 'sudo':
+                printLine(`<span class="error">[ERROR]</span> Permission denied: You are already the root user of this portfolio. Try '<span class="func">contact</span>' instead.`);
+                break;
+            case 'exit':
+                printLine(`<span class="comment">Logging out... Session terminated. (Refresh page to restart)</span>`);
+                inputLine.style.display = "none";
+                break;
+            case 'import antigravity':
+                printLine(`<span class="str">🚀</span> Python easter egg activated! You are now floating through Arastu's multi-agent workflows.`);
+                break;
+            case 'ls':
+                printLine(`<span class="func">about.py</span>  <span class="func">experience.py</span>  <span class="func">research.log</span>  <span class="func">projects/</span>  <span class="func">stack.json</span>  <span class="func">timeline.md</span>  <span class="highlight">README.md</span>`);
+                break;
+            case 'cat readme.md':
+                printLine(`<span class="kw"># Arastu Thakur</span>\nData Scientist specializing in Generative AI, Agentic Systems, and Production ML Engineering.\nCurrently building scalable AI solutions at Intel Corporation.\n\n<span class="highlight">Status:</span> Open to collaborative research and advanced ML engineering roles.`);
+                break;
+            default:
+                printLine(`<span class="error">NameError</span>: name '<span class="str">${cleanCmd}</span>' is not defined. Type '<span class="func">help</span>' for available commands.`);
+        }
+    }
+
+    commandInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            const cmd = this.value;
+            this.value = '';
+            processCommand(cmd);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            if (historyIndex > 0) {
+                historyIndex--;
+                this.value = commandHistory[historyIndex];
+            }
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            if (historyIndex < commandHistory.length - 1) {
+                historyIndex++;
+                this.value = commandHistory[historyIndex];
+            } else {
+                historyIndex = commandHistory.length;
+                this.value = '';
+            }
+        }
+    });
+
+    document.addEventListener('click', function() {
+        if (inputLine.style.display !== 'none') {
+            commandInput.focus();
+        }
+    });
+
+    window.onload = typeBootSequence;
+</script>
+
+</body>
+</html>
