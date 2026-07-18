@@ -151,46 +151,52 @@ document.addEventListener('DOMContentLoaded', () => {
       title: 'Generative AI Engineering with LLMs',
       issuer: 'IBM',
       completedDate: 'October 21, 2024',
-      duration: '3 months at 4 hours/week',
-      description: 'Acquired job-ready skills in generative AI, large language models (LLMs), and NLP applications. Mastered key concepts of attention mechanisms, tokenization, RAG (Retrieval-Augmented Generation), fine-tuning transformer models, and AI agent creation using LangChain and Hugging Face.',
-      skills: ['Generative AI Agents', 'LLM Application Development', 'Prompt Engineering', 'LangChain', 'transformers', 'Vector DBs / RAG', 'Reinforcement Learning', 'PyTorch'],
-      courses: [
-        { name: 'Generative AI and LLMs: Architecture and Data Preparation', link: 'https://www.coursera.org/learn/generative-ai-llms-architecture-data-preparation' },
-        { name: 'Gen AI Foundational Models for NLP & Language Understanding', link: 'https://www.coursera.org/learn/generative-ai-foundational-models-nlp' },
-        { name: 'Generative AI Language Modeling with Transformers', link: 'https://www.coursera.org/learn/generative-ai-language-modeling-transformers' },
-        { name: 'Generative AI Engineering and Fine-Tuning Transformers', link: 'https://www.coursera.org/learn/generative-ai-engineering-fine-tuning-transformers' },
-        { name: 'Generative AI Advanced Fine-Tuning for LLMs', link: 'https://www.coursera.org/learn/generative-ai-advanced-fine-tuning-llms' },
-        { name: 'Fundamentals of AI Agents Using RAG and LangChain', link: 'https://www.coursera.org/learn/fundamentals-ai-agents-rag-langchain' },
-        { name: 'Project: Generative AI Applications with RAG and LangChain', link: 'https://www.coursera.org/learn/project-generative-ai-applications-rag-langchain' }
-      ]
+      duration: '7 courses',
+      courseCount: '7 courses',
+      certificateUrl: 'https://coursera.org/verify/specialization/NYLN4DFH49A2',
+      description: 'Learners developed practical skills for AI and NLP engineer roles, including tokenization, data loaders, transformers, attention mechanisms, prompt engineering, GPT, BERT, PyTorch, Hugging Face Transformers, RAG applications, and LangChain document loaders.',
+      skills: ['7 Courses', 'Generative AI Architectures', 'LLMs', 'Prompt Engineering', 'PyTorch', 'Hugging Face Transformers', 'RAG Applications', 'LangChain'],
+      courseHighlights: [
+        'Generative AI and LLMs: Architecture and Data Preparation',
+        'Gen AI Foundational Models for NLP & Language Understanding',
+        'Generative AI Language Modeling with Transformers',
+        'Generative AI Engineering and Fine-Tuning Transformers',
+        'Generative AI Advanced Fine-Tuning for LLMs',
+        'Fundamentals of AI Agents Using RAG and LangChain',
+        'Project: Generative AI Applications with RAG and LangChain'
+      ],
     },
     'duke-mlops': {
       title: 'MLOps | Machine Learning Operations',
       issuer: 'Duke University',
       completedDate: 'October 20, 2024',
-      duration: '6 months at 5 hours/week',
-      description: 'Laid foundations in Python development, data pipelines, and MLOps workflows. Built end-to-end ML solution delivery pipelines utilizing Amazon SageMaker, AWS, Microsoft Azure, Hugging Face, and MLflow, managing logs, configurations, and ONNX container exports.',
-      skills: ['MLOps Infrastructure', 'Model Deployment', 'AWS SageMaker', 'Microsoft Azure', 'MLflow', 'Hugging Face', 'ONNX Containerization', 'Data Engineering'],
-      courses: [
-        { name: 'Python Essentials for MLOps', link: 'https://www.coursera.org/learn/python-essentials-mlops' },
-        { name: 'DevOps, DataOps, MLOps', link: 'https://www.coursera.org/learn/devops-dataops-mlops' },
-        { name: 'MLOps Platforms: Amazon SageMaker and Azure ML', link: 'https://www.coursera.org/learn/mlops-platforms-amazon-sagemaker-azure-ml' },
-        { name: 'MLOps Tools: MLflow and Hugging Face', link: 'https://www.coursera.org/learn/mlops-tools-mlflow-huggingface' }
-      ]
+      duration: '4 courses',
+      courseCount: '4 courses',
+      certificateUrl: 'https://coursera.org/verify/specialization/HK87TXCQG8ON',
+      description: 'This specialization builds a strong foundation in Python fundamentals, MLOps principles, data management, and production deployment. It includes hands-on work with Amazon SageMaker, AWS, Azure, MLflow, and Hugging Face for end-to-end ML solutions, pipelines, APIs, and ONNX-based container exports.',
+      skills: ['4 Courses', 'Python Essentials for MLOps', 'Amazon SageMaker', 'Azure ML', 'MLflow', 'Hugging Face', 'Production ML', 'ONNX'],
+      courseHighlights: [
+        'Python Essentials for MLOps',
+        'DevOps, DataOps, MLOps',
+        'MLOps Platforms: Amazon SageMaker and Azure ML',
+        'MLOps Tools: MLflow and Hugging Face'
+      ],
     },
     'packt-devops': {
       title: 'DevOps Complete Course',
       issuer: 'Packt Publishing',
       completedDate: 'October 21, 2024',
-      duration: '2 months at 10 hours/week',
-      description: 'Mastered software delivery cycles and operational administration. Configured repositories with Git and GitHub, automated compilation tasks using Maven, orchestrated continuous builds via Jenkins, and containerized architectures on Docker and Kubernetes with Ansible configurations.',
-      skills: ['CI/CD Pipelines', 'Docker', 'Kubernetes', 'Ansible Integration', 'Prometheus & Grafana', 'Git / GitHub Workflow', 'Apache Maven', 'Jenkins Orchestration'],
-      courses: [
-        { name: 'Foundations of DevOps and Git', link: 'https://www.coursera.org/learn/foundations-devops-git' },
-        { name: 'Advanced Git and GitHub Practices', link: 'https://www.coursera.org/learn/advanced-git-github-practices' },
-        { name: 'Build Automation and Continuous Integration', link: 'https://www.coursera.org/learn/build-automation-continuous-integration' },
-        { name: 'Advanced DevOps Tools and Practices', link: 'https://www.coursera.org/learn/advanced-devops-tools-practices' }
-      ]
+      duration: '4 courses',
+      courseCount: '4 courses',
+      certificateUrl: 'https://coursera.org/verify/specialization/R7NAWDY144XA',
+      description: 'This certificate focuses on core DevOps principles and modern software delivery, including Git and GitHub workflows, Maven and Jenkins automation, Docker and Kubernetes containerization, and infrastructure management with Ansible, Prometheus, and Grafana.',
+      skills: ['4 Courses', 'Git and GitHub', 'Maven', 'Jenkins', 'Docker', 'Kubernetes', 'Ansible', 'Prometheus & Grafana'],
+      courseHighlights: [
+        'Foundations of DevOps and Git',
+        'Advanced Git and GitHub Practices',
+        'Build Automation and Continuous Integration',
+        'Advanced DevOps Tools and Practices'
+      ],
     }
   };
 
@@ -198,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const data = certificationsData[tabId];
     if (!data) return;
 
-    // 1. Render Left Column (Info Card & Mock Certificate)
+    // 1. Render Left Column (Specialization Summary)
     let skillsHtml = data.skills.map(s => `<span class="tag">${s}</span>`).join('');
     
     certMainInfo.innerHTML = `
@@ -213,43 +219,19 @@ document.addEventListener('DOMContentLoaded', () => {
         <h3>${data.title} Specialization</h3>
         <p>${data.description}</p>
         <div class="tech-tags">${skillsHtml}</div>
-      </div>
-      <div class="certificate-replica-frame">
-        <div class="replica-watermark">COURSERA</div>
-        <div class="replica-org-logo">${data.issuer} Specialization</div>
-        <div class="replica-cert-lbl">Certificate of Completion</div>
-        <div class="replica-name">Arastu Thakur</div>
-        <div class="replica-spec">successfully completed all requirements for ${data.title}</div>
-        <div class="replica-footer">
-          <div>Verified Credential<br>Completed: ${data.completedDate}</div>
-          <div class="replica-seal">V</div>
-        </div>
-      </div>
-      <div class="cert-meta-group">
-        <div class="cert-meta-row"><strong>Verified Record:</strong> Coursera Specialization Ledger</div>
-        <div class="cert-meta-row"><strong>Schedule Intensity:</strong> ${data.duration}</div>
+        ${data.courseHighlights ? `<div class="course-highlights">${data.courseHighlights.map(course => `<span class="tag">${course}</span>`).join('')}</div>` : ''}
       </div>
     `;
 
-    // 2. Render Right Column (Courses Ledger List - Simplified)
-    let coursesHtml = data.courses.map(course => {
-      return `
-        <div class="ledger-course-card">
-          <div class="course-info">
-            <span class="course-title">${course.name}</span>
-            <span class="course-instructor">${data.issuer} Curriculum Course</span>
-          </div>
-          <div class="course-metrics">
-            <a href="${course.link}" target="_blank" class="btn btn-outline btn-sm" style="padding: 0.2rem 0.5rem; font-size: 0.72rem; gap: 0.3rem; border-radius: 3px;">
-              Verify
-              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-            </a>
-          </div>
-        </div>
-      `;
-    }).join('');
-
-    certCoursesList.innerHTML = coursesHtml;
+    // 2. Render Right Column (Single Certificate Verification Link)
+    certCoursesList.innerHTML = `
+      <div class="ledger-course-card" style="display: flex; justify-content: center; align-items: center; min-height: 120px;">
+        <a href="${data.certificateUrl}" target="_blank" class="btn btn-outline btn-sm" style="padding: 0.2rem 0.5rem; font-size: 0.72rem; gap: 0.3rem; border-radius: 3px;">
+          Verify Certificate
+          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+      </div>
+    `;
   }
 
   // Bind Tab clicks
