@@ -1,475 +1,1306 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arastu Thakur | root@ai-portfolio:~</title>
-    <style>
-        :root {
-            --bg-color: #0a0c10;
-            --term-bg: #111318;
-            --text-color: #a9b1d6;
-            --accent-green: #9ece6a;
-            --accent-cyan: #7dcfff;
-            --accent-purple: #bb9af7;
-            --accent-yellow: #e0af68;
-            --accent-red: #f7768e;
-            --font-mono: 'Fira Code', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>Arastu Thakur | AI/ML & DevOps Engineer | Generative AI Systems</title>
+  <meta name="title" content="Arastu Thakur | AI/ML & DevOps Engineer | Generative AI Systems">
+  <meta name="description" content="Official portfolio of Arastu Thakur, AI/ML & DevOps Engineer at Intel. Specializing in Generative AI systems, MLOps, neural networks, and automation. Explorer of medical AI with 15+ publications and 550+ citations.">
+  <meta name="keywords" content="Arastu Thakur, AI Engineer, ML Engineer, DevOps, Generative AI, Intel, Jain University, Deep Learning, MLOps, Publications, Research, Medical AI, dibidb, dynamic pricing, trade reconciliation, quantum simulator">
+  <meta name="author" content="Arastu Thakur">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://arastuthakur.github.io/">
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+  <!-- SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23000000' stroke='%231c1c1c' stroke-width='6'/%3E%3Ctext x='50%25' y='64%25' font-size='42' font-family='Space Grotesk, sans-serif' font-weight='bold' fill='%23ffffff' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-mono);
-            font-size: 14px;
-            line-height: 1.6;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://arastuthakur.github.io/">
+  <meta property="og:title" content="Arastu Thakur | AI/ML & DevOps Engineer">
+  <meta property="og:description" content="Data Scientist at Intel. Specializing in Generative AI, MLOps, and automated validation. 15+ publications, 550+ citations.">
+  <meta property="og:image" content="https://github.com/arastuthakur.png">
 
-        /* CRT Scanline & Glow Effect */
-        body::before {
-            content: " ";
-            display: block;
-            position: absolute;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            z-index: 10;
-            background-size: 100% 3px, 4px 100%;
-            pointer-events: none;
-        }
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://arastuthakur.github.io/">
+  <meta property="twitter:title" content="Arastu Thakur | AI/ML & DevOps Engineer">
+  <meta property="twitter:description" content="AI/ML & DevOps Engineer at Intel. Specializing in Generative AI, MLOps, and automated validation. 15+ publications, 550+ citations.">
+  <meta property="twitter:image" content="https://github.com/arastuthakur.png">
 
-        .terminal-window {
-            width: 95%;
-            max-width: 1000px;
-            height: 92vh;
-            background-color: var(--term-bg);
-            border: 1px solid #2a2e3a;
-            border-radius: 10px;
-            box-shadow: 0 0 40px rgba(125, 207, 255, 0.08), 0 25px 60px rgba(0,0,0,0.6);
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        .terminal-header {
-            background-color: #1a1d24;
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #2a2e3a;
-            border-radius: 10px 10px 0 0;
-        }
+  <!-- Styling -->
+  <link rel="stylesheet" href="./style.css">
 
-        .terminal-buttons { display: flex; gap: 8px; }
-        .btn { width: 13px; height: 13px; border-radius: 50%; }
-        .btn-red { background-color: #ff5f57; box-shadow: 0 0 4px #ff5f57; }
-        .btn-yellow { background-color: #febc2e; box-shadow: 0 0 4px #febc2e; }
-        .btn-green { background-color: #28c840; box-shadow: 0 0 4px #28c840; }
-
-        .terminal-title {
-            margin-left: 16px;
-            color: #565f71;
-            font-size: 13px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        .terminal-body {
-            flex: 1;
-            padding: 24px;
-            overflow-y: auto;
-            scroll-behavior: smooth;
-        }
-
-        .terminal-body::-webkit-scrollbar { width: 8px; }
-        .terminal-body::-webkit-scrollbar-track { background: var(--term-bg); }
-        .terminal-body::-webkit-scrollbar-thumb { background: #2a2e3a; border-radius: 4px; }
-
-        .output-line { margin-bottom: 6px; white-space: pre-wrap; word-wrap: break-word; }
-        .prompt { color: var(--accent-green); font-weight: bold; }
-        .command { color: var(--text-color); }
-        
-        .input-line {
-            display: flex;
-            align-items: center;
-            padding: 0 24px 24px 24px;
-        }
-
-        .input-field {
-            background: transparent;
-            border: none;
-            color: var(--text-color);
-            font-family: var(--font-mono);
-            font-size: 14px;
-            flex: 1;
-            outline: none;
-            margin-left: 8px;
-            caret-color: var(--accent-green);
-        }
-
-        /* Syntax Highlighting Classes */
-        .kw { color: var(--accent-purple); font-weight: bold; }
-        .str { color: var(--accent-green); }
-        .func { color: var(--accent-cyan); }
-        .num { color: var(--accent-yellow); }
-        .comment { color: #565f71; font-style: italic; }
-        .link { color: var(--accent-cyan); text-decoration: none; border-bottom: 1px dashed var(--accent-cyan); transition: all 0.2s; }
-        .link:hover { color: var(--accent-green); border-bottom-style: solid; }
-        .highlight { color: var(--accent-yellow); font-weight: bold; }
-        .error { color: var(--accent-red); }
-        .bold { font-weight: bold; }
-
-        /* Robust ASCII Art Container */
-        .ascii-art {
-            color: var(--accent-cyan);
-            font-size: 12px;
-            line-height: 1.1;
-            margin: 16px 0;
-            font-weight: bold;
-            white-space: pre; /* Guarantees ASCII alignment */
-            overflow-x: auto;
-        }
-
-        .neofetch-grid {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 8px 24px;
-            margin: 12px 0;
-        }
-        .neofetch-label { color: var(--accent-purple); font-weight: bold; min-width: 140px; }
-        .neofetch-value { color: var(--text-color); }
-
-        .tree-line { color: #565f71; }
-
-        @media (max-width: 768px) {
-            .ascii-art { font-size: 8px; }
-            body { font-size: 12px; }
-            .input-field { font-size: 12px; }
-            .terminal-body { padding: 16px; }
-            .input-line { padding: 0 16px 16px 16px; }
-            .neofetch-grid { grid-template-columns: 1fr; gap: 4px; }
-            .neofetch-label { min-width: auto; }
-        }
-    </style>
+  <!-- JSON-LD Structured Data for SEO, AEO, and GEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://arastuthakur.github.io/#person",
+        "name": "Arastu Thakur",
+        "jobTitle": "AI/ML & DevOps Engineer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Intel Corporation"
+        },
+        "alumnusOf": {
+          "@type": "EducationalOrganization",
+          "name": "Jain (Deemed-to-be) University",
+          "url": "https://www.jainuniversity.ac.in/"
+        },
+        "url": "https://arastuthakur.github.io/",
+        "sameAs": [
+          "https://www.linkedin.com/in/arastu-thakur",
+          "https://github.com/arastuthakur",
+          "https://scholar.google.com/citations?user=Gk71-lQAAAAJ",
+          "https://orcid.org/0009-0006-4381-5500",
+          "https://leetcode.com/u/arustuthakur/"
+        ],
+        "email": "arustuthakur@gmail.com",
+        "telephone": "+91-9473121221",
+        "description": "AI/ML Engineer with ~2 years of experience at Intel building automation systems, production ML workflows, AI-assisted validation, and scalable software infrastructure. 15 publications and 550+ citations in medical AI and deep learning.",
+        "knowsAbout": ["Artificial Intelligence", "Machine Learning", "DevOps", "Generative AI", "Large Language Models", "Kubernetes", "PyTorch", "TensorFlow", "MLOps", "C++", "Python", "CI/CD"],
+        "award": [
+          "Gold Medalist, Jain University",
+          "Study in India Scholarship (Top 5% of 10,000+ applicants)",
+          "1st Runner-Up - JAIN x Honeywell Hackathon 2024"
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
-<div class="terminal-window">
-    <div class="terminal-header">
-        <div class="terminal-buttons">
-            <div class="btn btn-red"></div>
-            <div class="btn btn-yellow"></div>
-            <div class="btn btn-green"></div>
+  <!-- Navigation Bar -->
+  <header>
+    <div class="nav-container glass">
+      <a href="#home" class="logo">
+        <span class="logo-bracket">&lt;</span>Arastu<span class="logo-dot">.</span>Thakur<span class="logo-bracket">/&gt;</span>
+      </a>
+      <nav id="nav-links">
+        <a href="#home" class="nav-item active">Home</a>
+        <a href="#about" class="nav-item">About</a>
+        <a href="#experience" class="nav-item">Experience</a>
+        <a href="#projects" class="nav-item">Projects</a>
+        <a href="#certifications" class="nav-item">Certificates</a>
+        <a href="#publications" class="nav-item">Research</a>
+        <a href="#skills" class="nav-item">Skills</a>
+        <a href="#contact" class="nav-item">Contact</a>
+      </nav>
+      <div class="menu-toggle" id="mobile-menu-btn">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-tagline glass"><span> Intel Data Scientist & AI Researcher</span></div>
+          <div class="hero-header-row">
+            <div class="hero-avatar glass">
+              <img src="https://github.com/arastuthakur.png" alt="Arastu Thakur">
+            </div>
+            <div>
+              <h1 class="hero-title">ARASTU THAKUR</h1>
+              <h2 class="hero-subtitle">
+                <span class="typing-text" id="typewriter-text"></span><span class="cursor">|</span>
+              </h2>
+            </div>
+          </div>
+          <p class="hero-desc">
+            AI/ML Engineer specializing in Generative AI systems, scalable MLOps, deep learning pipelines, and production software engineering. Bridging the gap between intelligent research models and production-grade automation.
+          </p>
+          <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary">
+              Let's Connect
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="#projects" class="btn btn-outline">Explore Projects</a>
+          </div>
+          <div class="hero-socials">
+            <a href="https://github.com/arastuthakur" target="_blank" aria-label="GitHub" class="social-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/arastu-thakur" target="_blank" aria-label="LinkedIn" class="social-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="https://leetcode.com/u/arustuthakur/" target="_blank" aria-label="LeetCode" class="social-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15.5L6.5 13l1.41-1.41L11 14.67l5.09-5.09L17.5 11 11 17.5z"></path></svg>
+            </a>
+            <a href="https://www.geeksforgeeks.org/user/arustuthakur/" target="_blank" aria-label="GeeksforGeeks" class="social-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            </a>
+            <a href="https://scholar.google.com/citations?user=Gk71-lQAAAAJ" target="_blank" aria-label="Google Scholar" class="social-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg>
+            </a>
+            <a href="https://orcid.org/0009-0006-4381-5500" target="_blank" aria-label="ORCID" class="social-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.8 14.8h-1.6V8.2h1.6v7.8zm0-9h-1.6V6.2h1.6v1.6zm5.8 9h-1.6v-3.7c0-1.1-.9-2-2-2h-.6v5.7h-1.6V8.2h2.2c2 0 3.6 1.6 3.6 3.6v4z"></path></svg>
+            </a>
+          </div>
         </div>
-        <div class="terminal-title">arastu@intel: ~/agentic-portfolio (main)</div>
+
+        <!-- Code Snippet Workspace Mock -->
+        <div class="hero-visual">
+          <div class="terminal-widget glass">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <div class="terminal-title">validation_pipeline.py — Edit</div>
+            </div>
+            <div class="terminal-body" id="terminal-output">
+              <pre><code class="language-python"><span class="code-kw">import</span> intel_ops <span class="code-kw">as</span> ops
+<span class="code-kw">from</span> dl_models <span class="code-kw">import</span> <span class="code-fn">DefectEncoder</span>
+
+<span class="code-comment"># Initialize production validation models</span>
+model = <span class="code-fn">DefectEncoder</span>(target_accuracy=<span class="code-num">0.94</span>)
+pipeline = ops.<span class="code-fn">SimilarityPipeline</span>(metric=<span class="code-str">"cosine"</span>)
+
+<span class="code-comment"># Optimize cycle times using Cosine Similarity mappings</span>
+results = pipeline.<span class="code-fn">run</span>(model)
+<span class="code-fn">print</span>(f<span class="code-str">"Validation Cycle Reduction: -{results.reduction_rate}%"</span>)
+
+<span class="code-output">&gt;&gt; Validation Cycle Reduction: -30% [SUCCESS]</span></code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- METRICS & ABOUT SECTION -->
+    <section id="about" class="about-section scroll-offset">
+      <div class="container">
+        <h2 class="section-title text-center">Engineered For Impact</h2>
+        
+        <!-- Metrics Grid -->
+        <div class="metrics-grid">
+          <div class="metric-card glass">
+            <div class="metric-num-wrapper">
+              <span class="metric-number" data-target="94">0</span><span class="metric-suffix">%</span>
+            </div>
+            <p class="metric-label">Validation Accuracy Achieved</p>
+            <p class="metric-sub">On DL-based defect reduction solutions at Intel.</p>
+          </div>
+
+          <div class="metric-card glass">
+            <div class="metric-num-wrapper">
+              <span class="metric-number" data-target="30">0</span><span class="metric-suffix">%</span>
+            </div>
+            <p class="metric-label">Reduced Validation Cycle Time</p>
+            <p class="metric-sub">Achieved by Mapping Cosine Similarity.</p>
+          </div>
+
+          <div class="metric-card glass">
+            <div class="metric-num-wrapper">
+              <span class="metric-number" data-target="16">0</span><span class="metric-suffix"></span>
+            </div>
+            <p class="metric-label">Research Publications</p>
+            <p class="metric-sub">SCIE journals, IEEE Transactions, and international venues.</p>
+          </div>
+
+          <div class="metric-card glass">
+            <div class="metric-num-wrapper">
+              <span class="metric-number" data-target="621">0</span><span class="metric-suffix"></span>
+            </div>
+            <p class="metric-label">Academic Citations</p>
+            <p class="metric-sub">Google Scholar certified citations.</p>
+          </div>
+        </div>
+
+        <div class="about-content-grid">
+          <div class="about-bio glass">
+            <h3>Bio-Initialization</h3>
+            <p>
+              I am an AI/ML and DevOps Engineer who thrives at the intersection of automation infrastructure, advanced model development, and Generative AI workflows. Currently working as a <strong>Data Scientist at Intel</strong>, I develop AI-driven automation systems, production ML workflows, and scalable big data analytics that serve daily engineering operations.
+            </p>
+            <p>
+              On the research front, I have published over 16 papers focused on medical imaging AI (brain tumor segmentation, breast cancer diagnostics, oral cancer detection) and sustainable AI. I hold a B.Tech in Computer Science & Engineering from Jain University, graduating as a <strong>Gold Medalist with a 9.757 GPA</strong>.
+            </p>
+            <p>
+              My goal is to continue building software that makes AI workflows safer, faster, and highly autonomous in production environments.
+            </p>
+          </div>
+
+          <div class="about-academic glass">
+            <h3>Key Credentials</h3>
+            <div class="credential-item">
+              <span class="cred-dot cyan"></span>
+              <div>
+                <strong>B.Tech in Computer Science (Gold Medalist)</strong>
+                <p>Jain (Deemed-to-be) University | GPA: 9.757/10</p>
+              </div>
+            </div>
+            <div class="credential-item">
+              <span class="cred-dot purple"></span>
+              <div>
+                <strong>Full-Tuition Study in India Scholarship</strong>
+                <p>Awarded to top 5% of 10,000+ international applicants.</p>
+              </div>
+            </div>
+            <div class="credential-item">
+              <span class="cred-dot green"></span>
+              <div>
+                <strong>1st Runner-Up - JAIN x Honeywell Hackathon 2024</strong>
+                <p>Developed smart systems for Fire-Safe Environments.</p>
+              </div>
+            </div>
+            <div class="credential-item">
+              <span class="cred-dot yellow"></span>
+              <div>
+                <strong>LeetCode & GeeksforGeeks Profiles</strong>
+                <p>Top 5% Solver on LeetCode | 500+ Algorithms Solved</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience" class="experience-section scroll-offset">
+      <div class="container">
+        <h2 class="section-title text-center">Professional History</h2>
+        
+        <div class="timeline">
+          
+          <!-- Experience Item 1 -->
+          <div class="timeline-item left">
+            <div class="timeline-badge">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            </div>
+            <div class="timeline-content glass">
+              <span class="timeline-date">Jun 2025 – Present</span>
+              <h3>Data Scientist</h3>
+              <h4 class="company-name text-cyan">Intel Corporation</h4>
+              <p class="location">Bengaluru, India</p>
+              <ul class="experience-details">
+                <li>Developed AI-driven automation and deep learning-based encoder solutions for defect reduction, achieving ~94% validation accuracy and improving overall testing efficiency by 10%.</li>
+                <li>Built and maintained production ML automation and SQL-based big data analytics systems, supporting 20+ users and processing ~1,000+ queries daily across multiple engineering workflows.</li>
+                <li>Created specialized script pipelines linking database transactions with validation execution matrices.</li>
+              </ul>
+              <div class="tech-tags">
+                <span class="tag">Deep Learning</span>
+                <span class="tag">SQL Analytics</span>
+                <span class="tag">Production MLOps</span>
+                <span class="tag">Python</span>
+                <span class="tag">Docker</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Experience Item 2 -->
+          <div class="timeline-item right">
+            <div class="timeline-badge">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            </div>
+            <div class="timeline-content glass">
+              <span class="timeline-date">Jul 2024 – Jun 2025</span>
+              <h3>Graduate Technical Intern</h3>
+              <h4 class="company-name text-purple">Intel Corporation</h4>
+              <p class="location">Bengaluru, India</p>
+              <ul class="experience-details">
+                <li>Developed AI-powered automation bots and debugging utilities that reduced repetitive validation efforts by ~30% and improved diagnostics accuracy across engineering workflows.</li>
+                <li>Migrated and optimized 1,200+ validation test cases while supporting SQL-driven big data analytics and reporting pipelines for large-scale validation operations.</li>
+                <li>Integrated agentic scripts into development pipelines.</li>
+              </ul>
+              <div class="tech-tags">
+                <span class="tag">AI Bots</span>
+                <span class="tag">Validation Migration</span>
+                <span class="tag">SQL</span>
+                <span class="tag">C++</span>
+                <span class="tag">GitLab CI/CD</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects" class="projects-section scroll-offset">
+      <div class="container">
+        <h2 class="section-title text-center">Highlighted Repositories</h2>
+        <p class="section-desc text-center">Curated list of public open-source implementations on my GitHub.</p>
+        
+        <!-- Projects Filter Tabs -->
+        <div class="project-filter-container glass">
+          <div class="filter-tabs">
+            <button class="project-filter-btn active" data-proj-filter="all">All Systems</button>
+            <button class="project-filter-btn" data-proj-filter="ai">AI & Agents</button>
+            <button class="project-filter-btn" data-proj-filter="quant">Quantitative & Finance</button>
+            <button class="project-filter-btn" data-proj-filter="core">Systems & Core</button>
+          </div>
+        </div>
+
+        <div class="projects-grid" id="projects-list-container">
+          
+          <!-- Project 1 (dibidb) -->
+          <div class="project-card glass" data-proj-category="core">
+            <div class="project-header">
+              <div class="project-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"></path></svg>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/arastuthakur/dibidb" target="_blank" class="github-link" aria-label="GitHub Repo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">dibidb</h3>
+            <p class="project-desc">
+              A high-performance, lightweight embedded database engine in Python. Engineered to support document structures, transactional schemas, and quick data persistence with minimal dependencies.
+            </p>
+            <div class="project-tech">
+              <span class="tag">Python</span>
+              <span class="tag">Database Design</span>
+              <span class="tag">Embedded Systems</span>
+              <span class="tag">JSON Storage</span>
+            </div>
+          </div>
+
+          <!-- Project 2 (Data-Analysis-Insights-Platform) -->
+          <div class="project-card glass" data-proj-category="ai">
+            <div class="project-header">
+              <div class="project-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/arastuthakur/Data-Analysis-Insights-Platform" target="_blank" class="github-link" aria-label="GitHub Repo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">Data Analysis Insights Platform</h3>
+            <p class="project-desc">
+              End-to-end exploratory data analysis software. Incorporates automated ML processing, statistical visualization pipelines, and LLM-powered (Gemini) textual insight generation over complex datasets.
+            </p>
+            <div class="project-tech">
+              <span class="tag">Python</span>
+              <span class="tag">TensorFlow</span>
+              <span class="tag">Gemini AI</span>
+              <span class="tag">Streamlit</span>
+              <span class="tag">Plotly</span>
+            </div>
+          </div>
+
+          <!-- Project 3 (Trade-Reconciliation-PnL-Tool) -->
+          <div class="project-card glass" data-proj-category="quant">
+            <div class="project-header">
+              <div class="project-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"></rect><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/arastuthakur/Trade-Reconciliation-PnL-Tool" target="_blank" class="github-link" aria-label="GitHub Repo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">Trade Reconciliation & PnL</h3>
+            <p class="project-desc">
+              Fintech reconciliation pipeline for quantitative traders. Reconciles transaction logs across multiple brokers, detects discrepancies, and calculates realized and unrealized PnL metrics.
+            </p>
+            <div class="project-tech">
+              <span class="tag">Python</span>
+              <span class="tag">Quantitative Finance</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">Ledger Matching</span>
+            </div>
+          </div>
+
+          <!-- Project 4 (Dynamic-Pricing-Engine) -->
+          <div class="project-card glass" data-proj-category="quant">
+            <div class="project-header">
+              <div class="project-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/arastuthakur/Dynamic-Pricing-Engine" target="_blank" class="github-link" aria-label="GitHub Repo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">Dynamic Pricing Engine</h3>
+            <p class="project-desc">
+              Engine calculating commerce price thresholds dynamically. Applies demand elasticities, time-decay factors, and competitive pricing metrics to optimize yields in real-time.
+            </p>
+            <div class="project-tech">
+              <span class="tag">JavaScript</span>
+              <span class="tag">Algorithms</span>
+              <span class="tag">Yield Optimization</span>
+              <span class="tag">ML Models</span>
+            </div>
+          </div>
+
+          <!-- Project 5 (Neural-Network-in-C) -->
+          <div class="project-card glass" data-proj-category="core">
+            <div class="project-header">
+              <div class="project-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/arastuthakur/Neural-Network-in-C" target="_blank" class="github-link" aria-label="GitHub Repo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">Neural Network in C</h3>
+            <p class="project-desc">
+              From-scratch implementation of a Multi-Layer Perceptron neural network in ANSI C. Employs optimized pointer arithmetic, matrix transformations, and custom backpropagation for raw speed.
+            </p>
+            <div class="project-tech">
+              <span class="tag">C</span>
+              <span class="tag">Deep Learning Core</span>
+              <span class="tag">Memory Management</span>
+              <span class="tag">Matrix Algebra</span>
+            </div>
+          </div>
+
+          <!-- Project 6 (Market-Analysis-Dashboard) -->
+          <div class="project-card glass" data-proj-category="quant">
+            <div class="project-header">
+              <div class="project-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/arastuthakur/Market-Analysis-Dashboard" target="_blank" class="github-link" aria-label="GitHub Repo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">Market Analysis Dashboard</h3>
+            <p class="project-desc">
+              Analytical trading dashboard that tracks asset price indices, models historic distributions, and displays key technical indicators (RSI, MACD) on visual charts.
+            </p>
+            <div class="project-tech">
+              <span class="tag">Python</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">Matplotlib</span>
+              <span class="tag">Indicators</span>
+            </div>
+          </div>
+
+          <!-- Project 7 (Auto-Blogger) -->
+          <div class="project-card glass" data-proj-category="ai">
+            <div class="project-header">
+              <div class="project-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/arastuthakur/Auto-Blogger" target="_blank" class="github-link" aria-label="GitHub Repo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">Auto Blogger</h3>
+            <p class="project-desc">
+              Autonomous content creation tool. Coordinates LLMs to draft, format, verify, and publish tech blogs on schedule, utilizing API integrations with major hosting CMS engines.
+            </p>
+            <div class="project-tech">
+              <span class="tag">Python</span>
+              <span class="tag">LLMs</span>
+              <span class="tag">Content Engineering</span>
+              <span class="tag">Automation APIs</span>
+            </div>
+          </div>
+
+          <!-- Project 8 (Quantum-Simulator) -->
+          <div class="project-card glass" data-proj-category="core">
+            <div class="project-header">
+              <div class="project-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/arastuthakur/Quantum-Simulator" target="_blank" class="github-link" aria-label="GitHub Repo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">Quantum Simulator</h3>
+            <p class="project-desc">
+              A light-weight quantum computing state-vector simulator in C. Implements complex number mathematics to represent multi-qubit systems, and apply logic gates (Hadamard, CNOT, Pauli).
+            </p>
+            <div class="project-tech">
+              <span class="tag">C</span>
+              <span class="tag">Quantum Computing</span>
+              <span class="tag">State Vectors</span>
+              <span class="tag">Physics Math</span>
+            </div>
+          </div>
+
+          <!-- Project 9 (multi-agent-debate-system) -->
+          <div class="project-card glass" data-proj-category="ai">
+            <div class="project-header">
+              <div class="project-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/arastuthakur/multi-agent-debate-system" target="_blank" class="github-link" aria-label="GitHub Repo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">Multi-Agent Debate System</h3>
+            <p class="project-desc">
+              Orchestrates multiple LLM personas that converse and debate solutions to complex user problems. Enhances accuracy by filtering bias through multi-agent consensus mechanisms.
+            </p>
+            <div class="project-tech">
+              <span class="tag">Python</span>
+              <span class="tag">Generative AI</span>
+              <span class="tag">Multi-Agent System</span>
+              <span class="tag">Consensus</span>
+            </div>
+          </div>
+
+          <!-- Project 10 (Auto-ML-Coder) -->
+          <div class="project-card glass" data-proj-category="ai">
+            <div class="project-header">
+              <div class="project-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/arastuthakur/Auto-ML-Coder" target="_blank" class="github-link" aria-label="GitHub Repo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">Auto ML Coder</h3>
+            <p class="project-desc">
+              AI code generation loop that writes, runs, parses compile errors, and iteratively refines machine learning training code. Achieves zero-shot pipeline builds for tabular configurations.
+            </p>
+            <div class="project-tech">
+              <span class="tag">Python</span>
+              <span class="tag">Self-Refinement</span>
+              <span class="tag">Code Generation</span>
+              <span class="tag">MLOps</span>
+            </div>
+          </div>
+
+          <!-- Project 11 (DSA-Visualizer) -->
+          <div class="project-card glass" data-proj-category="core">
+            <div class="project-header">
+              <div class="project-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/arastuthakur/DSA-Visualizer" target="_blank" class="github-link" aria-label="GitHub Repo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">DSA Visualizer</h3>
+            <p class="project-desc">
+              Graphical tool built in C++ to visualize execution paths of classic algorithms (Dijkstra, A* search, tree rebalancing, and sorting) in real-time, aiding educational workflows.
+            </p>
+            <div class="project-tech">
+              <span class="tag">C++</span>
+              <span class="tag">Algorithms Visualized</span>
+              <span class="tag">Graph Theory</span>
+              <span class="tag">GUI Systems</span>
+            </div>
+          </div>
+
+          <!-- Project 12 (Quantitative-Paper-Analyzer) -->
+          <div class="project-card glass" data-proj-category="quant">
+            <div class="project-header">
+              <div class="project-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/arastuthakur/Quantitative-Paper-Analyzer" target="_blank" class="github-link" aria-label="GitHub Repo">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="project-title">Quantitative Paper Analyzer</h3>
+            <p class="project-desc">
+              Mathematical modeling ingestion parser. Extracts complex formulas, data matrices, and statistics tables from academic finance PDFs to auto-generate Python code matrices.
+            </p>
+            <div class="project-tech">
+              <span class="tag">Python</span>
+              <span class="tag">PDF Parsing</span>
+              <span class="tag">Math Modelling</span>
+              <span class="tag">Structured Extraction</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS HUB SECTION -->
+    <section id="certifications" class="certifications-section scroll-offset">
+      <div class="container">
+        <h2 class="section-title text-center">Specializations & Verified Certificates</h2>
+        <p class="section-desc text-center">Verified curriculum credentials completed through Coursera. Select a track to inspect course ledger and verify credentials.</p>
+
+        <!-- Cert Tab Selection -->
+        <div class="cert-tab-container glass">
+          <div class="filter-tabs">
+            <button class="cert-tab-btn active" data-cert-tab="ibm-genai">IBM Generative AI</button>
+            <button class="cert-tab-btn" data-cert-tab="duke-mlops">Duke MLOps</button>
+            <button class="cert-tab-btn" data-cert-tab="packt-devops">Packt DevOps</button>
+          </div>
+        </div>
+
+        <div class="cert-display-grid">
+          <!-- Left: Specialization Info Card & Mock Certificate Frame -->
+          <div class="cert-info-card glass" id="cert-main-info">
+            <!-- Dynamic Injection Area for Specialization Info -->
+          </div>
+
+          <!-- Right: Course Lists & Grades Ledger -->
+          <div class="cert-ledger-card glass">
+            <h3 class="ledger-title">Completed Curriculum Ledger</h3>
+            <div class="courses-ledger-list" id="cert-courses-list">
+              <!-- Dynamic Injection Area for Course Ledger -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS SECTION -->
+    <section id="publications" class="publications-section scroll-offset">
+      <div class="container">
+        <h2 class="section-title text-center">Scientific Research & Publications</h2>
+        <p class="section-desc text-center">Comprehensive index of peer-reviewed articles co-authored by Arastu Thakur. Sort and search to investigate findings.</p>
+
+        <!-- Google Scholar Metrics Bar -->
+        <div class="scholar-grid-wrapper">
+          <div class="scholar-stats-card glass">
+            <div class="scholar-stats-header">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path></svg>
+              <h3>Google Scholar Citation Profile</h3>
+            </div>
+            <div class="scholar-stats-metrics">
+              <div class="stat-pill">
+                <span class="stat-val">621</span>
+                <span class="stat-lbl">Citations</span>
+              </div>
+              <div class="stat-pill">
+                <span class="stat-val">8</span>
+                <span class="stat-lbl">h-index</span>
+              </div>
+              <div class="stat-pill">
+                <span class="stat-val">6</span>
+                <span class="stat-lbl">i10-index</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search and Filter Controls -->
+        <div class="filter-controls glass">
+          <div class="search-box">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="pub-search" placeholder="Search publications by title, journal, or tech...">
+          </div>
+          <div class="sort-box">
+            <label for="pub-sort">Sort by:</label>
+            <select id="pub-sort">
+              <option value="citations">Citations (High-Low)</option>
+              <option value="year">Year (New-Old)</option>
+            </select>
+          </div>
+          <div class="filter-tabs">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="medical">Medical AI</button>
+            <button class="filter-btn" data-filter="llm">LLMs & GenAI</button>
+            <button class="filter-btn" data-filter="security">Security & Systems</button>
+          </div>
+        </div>
+
+        <!-- Publications List -->
+        <div class="publications-list" id="pub-list-container">
+          
+          <!-- Publication 1 -->
+          <div class="pub-card glass" data-category="medical" data-citations="182" data-year="2024">
+            <div class="pub-header">
+              <span class="pub-venue">International Journal of Computational Intelligence Systems</span>
+              <span class="pub-year">2024</span>
+            </div>
+            <h3 class="pub-title">Transformative breast Cancer diagnosis using CNNs with optimized ReduceLROnPlateau and Early stopping Enhancements</h3>
+            <p class="pub-authors">Arastu Thakur, Muskan Gupta, DK Sinha, KK Mishra, VK Venkatesan, S Guluwadi</p>
+            <p class="pub-details">Applying optimized rate reductions and stop flags on customized Convolutional Neural Networks to achieve highly reliable breast cancer diagnostic categorization.</p>
+            <div class="pub-links">
+              <span class="tag">CNNs</span>
+              <span class="tag">ReduceLROnPlateau</span>
+              <span class="tag">Early Stopping</span>
+              <span class="tag tag-citations">Citations: 182</span>
+            </div>
+          </div>
+
+          <!-- Publication 2 -->
+          <div class="pub-card glass" data-category="medical" data-citations="136" data-year="2024">
+            <div class="pub-header">
+              <span class="pub-venue">BMC Medical Imaging</span>
+              <span class="pub-year">2024</span>
+            </div>
+            <h3 class="pub-title">Integrated approach of federated learning with transfer learning for classification and diagnosis of brain tumor</h3>
+            <p class="pub-authors">E Albalawi, Mahesh T. R., Arastu Thakur, V Vinoth Kumar, Muskan Gupta, S Bhatia Khan, A Almusharraf</p>
+            <p class="pub-details">Coordinating brain tumor classification parameters across multiple private clinic nodes using federated parameter exchanges and transfer layers.</p>
+            <div class="pub-links">
+              <span class="tag">Federated Learning</span>
+              <span class="tag">Transfer Learning</span>
+              <span class="tag">Privacy AI</span>
+              <span class="tag tag-citations">Citations: 136</span>
+            </div>
+          </div>
+
+          <!-- Publication 3 -->
+          <div class="pub-card glass" data-category="medical" data-citations="107" data-year="2024">
+            <div class="pub-header">
+              <span class="pub-venue">Frontiers in Medicine</span>
+              <span class="pub-year">2024</span>
+            </div>
+            <h3 class="pub-title">Oral squamous cell carcinoma detection using EfficientNet on histopathological images</h3>
+            <p class="pub-authors">E Albalawi, Arastu Thakur, Dr. Mahesh T. R., S Bhatia Khan, et al.</p>
+            <p class="pub-details">Applying customized convolutional features of the EfficientNet scale-vector model to diagnose cell biopsies for squamous carcinomas.</p>
+            <div class="pub-links">
+              <span class="tag">EfficientNet</span>
+              <span class="tag">Histopathology</span>
+              <span class="tag">Biopsies</span>
+              <span class="tag tag-citations">Citations: 107</span>
+            </div>
+          </div>
+
+          <!-- Publication 4 -->
+          <div class="pub-card glass" data-category="medical" data-citations="74" data-year="2024">
+            <div class="pub-header">
+              <span class="pub-venue">BMC Medical Imaging</span>
+              <span class="pub-year">2024</span>
+            </div>
+            <h3 class="pub-title">Refining neural network algorithms for accurate brain tumor classification in MRI imagery</h3>
+            <p class="pub-authors">A Alshuhail, Arastu Thakur, R Chandramma, Dr. Mahesh T. R., A Almusharraf, et al.</p>
+            <p class="pub-details">Implementing optimized pooling configurations to resolve meningiomas, gliomas, and pituitary tumors from sagittal MRI scans.</p>
+            <div class="pub-links">
+              <span class="tag">Brain MRI</span>
+              <span class="tag">CNN Classifications</span>
+              <span class="tag">Neural Architectures</span>
+              <span class="tag tag-citations">Citations: 74</span>
+            </div>
+          </div>
+
+          <!-- Publication 5 -->
+          <div class="pub-card glass" data-category="medical" data-citations="60" data-year="2024">
+            <div class="pub-header">
+              <span class="pub-venue">Frontiers in Computational Neuroscience</span>
+              <span class="pub-year">2024</span>
+            </div>
+            <h3 class="pub-title">Enhancing brain tumor classification in MRI scans with a multi-layer customized convolutional neural network approach</h3>
+            <p class="pub-authors">E Albalawi, Arastu Thakur, DR Dorai, S Bhatia Khan, Dr. Mahesh T. R., et al.</p>
+            <p class="pub-details">Applying multi-layer customized kernel mappings to detect early stage micro-tumors from clinical MRI slices.</p>
+            <div class="pub-links">
+              <span class="tag">Custom CNN</span>
+              <span class="tag">MRI Slices</span>
+              <span class="tag">Early Diagnostics</span>
+              <span class="tag tag-citations">Citations: 60</span>
+            </div>
+          </div>
+
+          <!-- Publication 6 -->
+          <div class="pub-card glass" data-category="medical" data-citations="29" data-year="2024">
+            <div class="pub-header">
+              <span class="pub-venue">Frontiers in Medicine</span>
+              <span class="pub-year">2024</span>
+            </div>
+            <h3 class="pub-title">Enhancing accessibility for improved diagnosis with modified EfficientNetV2-S and cyclic learning rate strategy in women with disabilities and breast cancer</h3>
+            <p class="pub-authors">M Al Moteri, Dr. Mahesh T. R., Arastu Thakur, V Vinoth Kumar, S Bhatia Khan, M Alojail</p>
+            <p class="pub-details">Implementing cyclic learning rate schedules on simplified EfficientNet architectures for mobile diagnostic setups.</p>
+            <div class="pub-links">
+              <span class="tag">EfficientNetV2-S</span>
+              <span class="tag">Cyclic LR</span>
+              <span class="tag">Mobile Diagnostics</span>
+              <span class="tag tag-citations">Citations: 29</span>
+            </div>
+          </div>
+
+          <!-- Publication 7 -->
+          <div class="pub-card glass" data-category="security" data-citations="8" data-year="2025">
+            <div class="pub-header">
+              <span class="pub-venue">SN Computer Science</span>
+              <span class="pub-year">2025</span>
+            </div>
+            <h3 class="pub-title">Enhanced layer extraction for efficient plant disease classification using Efficientnet B1</h3>
+            <p class="pub-authors">Arastu Thakur, Arastu Thakur, V Vivek, Dr. Mahesh T. R., KM Krishna</p>
+            <p class="pub-details">Extracting intermediate layer calculations to compress neural evaluation costs on resource-constrained agricultural edge devices.</p>
+            <div class="pub-links">
+              <span class="tag">Edge Computing</span>
+              <span class="tag">Plant Pathology</span>
+              <span class="tag">EfficientNet B1</span>
+              <span class="tag tag-citations">Citations: 8</span>
+            </div>
+          </div>
+
+          <!-- Publication 8 -->
+          <div class="pub-card glass" data-category="medical" data-citations="8" data-year="2024">
+            <div class="pub-header">
+              <span class="pub-venue">International Journal of Pattern Recognition and Artificial Intelligence</span>
+              <span class="pub-year">2024</span>
+            </div>
+            <h3 class="pub-title">An adaptive Xception model for classification of brain tumors</h3>
+            <p class="pub-authors">Arastu Thakur, Dr. Mahesh T. R., S Bhatia Khan, S Palaiahnakote, V Vinoth Kumar, et al.</p>
+            <p class="pub-details">Designing dynamic layers over Xception models to scale depth according to MRI diagnostic complexity factors.</p>
+            <div class="pub-links">
+              <span class="tag">Xception</span>
+              <span class="tag">Adaptive Depth</span>
+              <span class="tag">MRI Scans</span>
+              <span class="tag tag-citations">Citations: 8</span>
+            </div>
+          </div>
+
+          <!-- Publication 9 -->
+          <div class="pub-card glass" data-category="security" data-citations="4" data-year="2024">
+            <div class="pub-header">
+              <span class="pub-venue">Computational Intelligence</span>
+              <span class="pub-year">2024</span>
+            </div>
+            <h3 class="pub-title">AgriFusion: A Low-Carbon Sustainable Computing Approach for Precision Agriculture Through Probabilistic Ensemble Crop Recommendation</h3>
+            <p class="pub-authors">Dr. Mahesh T. R., Arastu Thakur, AK Velmurugan, S Bhatia Khan, T Reddy Gadekallu, et al.</p>
+            <p class="pub-details">Ensemble calculations evaluating soil, yield, and environment vectors with minimal computation footprint for sustainable farming recommendations.</p>
+            <div class="pub-links">
+              <span class="tag">Sustainable AI</span>
+              <span class="tag">Ensemble Learning</span>
+              <span class="tag">Agritech</span>
+              <span class="tag tag-citations">Citations: 4</span>
+            </div>
+          </div>
+
+          <!-- Publication 10 -->
+          <div class="pub-card glass" data-category="medical" data-citations="4" data-year="2024">
+            <div class="pub-header">
+              <span class="pub-venue">International Conference on Emerging Research</span>
+              <span class="pub-year">2024</span>
+            </div>
+            <h3 class="pub-title">Alzheimer Classification using Deep Learning and Augmentation</h3>
+            <p class="pub-authors">P Dumre, Arastu Thakur, DK Sinha</p>
+            <p class="pub-details">Applying generative augmentation filters to limited medical databases to train reliable Alzheimer CNN class selectors.</p>
+            <div class="pub-links">
+              <span class="tag">Alzheimer Classification</span>
+              <span class="tag">Data Augmentation</span>
+              <span class="tag">Deep CNN</span>
+              <span class="tag tag-citations">Citations: 4</span>
+            </div>
+          </div>
+
+          <!-- Publication 11 -->
+          <div class="pub-card glass" data-category="llm" data-citations="3" data-year="2025">
+            <div class="pub-header">
+              <span class="pub-venue">IEEE Transactions on Consumer Electronics</span>
+              <span class="pub-year">2025</span>
+            </div>
+            <h3 class="pub-title">Fine Tuned LLM With Lora-Q for Enhanced Health Literacy</h3>
+            <p class="pub-authors">Dr. Mahesh T. R., R Sivakami, Arastu Thakur, A Shankar, F Alqahtani</p>
+            <p class="pub-details">Compressing and parameterizing large models using quantized weights to deploy local patient literacy assistants on basic mobile devices.</p>
+            <div class="pub-links">
+              <span class="tag">QLoRA</span>
+              <span class="tag">Fine-Tuning</span>
+              <span class="tag">Health Literacy</span>
+              <span class="tag tag-citations">Citations: 3</span>
+            </div>
+          </div>
+
+          <!-- Publication 12 -->
+          <div class="pub-card glass" data-category="medical" data-citations="3" data-year="2025">
+            <div class="pub-header">
+              <span class="pub-venue">International Journal of Pattern Recognition and Artificial Intelligence</span>
+              <span class="pub-year">2025</span>
+            </div>
+            <h3 class="pub-title">Revolutionizing brain tumor diagnosis: a comprehensive model integrating VGG19 and LSTM for accurate MRI classification</h3>
+            <p class="pub-authors">C Venkatachalam, M Umamaheswari, P Shah, Arastu Thakur</p>
+            <p class="pub-details">Connecting structural CNN layers (VGG19) with sequential memory layers (LSTM) to evaluate sequential MRI slices as temporal streams.</p>
+            <div class="pub-links">
+              <span class="tag">VGG19 + LSTM</span>
+              <span class="tag">Sequential MRI</span>
+              <span class="tag">Sequence Classification</span>
+              <span class="tag tag-citations">Citations: 3</span>
+            </div>
+          </div>
+
+          <!-- Publication 13 -->
+          <div class="pub-card glass" data-category="security" data-citations="2" data-year="2025">
+            <div class="pub-header">
+              <span class="pub-venue">Egyptian Informatics Journal</span>
+              <span class="pub-year">2025</span>
+            </div>
+            <h3 class="pub-title">Refining digital security with EfficientNetV2-B2 deepfake detection techniques</h3>
+            <p class="pub-authors">GN Vivekananda, Dr. Mahesh T. R., Muskan Gupta, Arastu Thakur, A Sayal</p>
+            <p class="pub-details">Isolating micro-artifacts and compression inconsistencies in deepfake video faces using EfficientNetV2 convolution layers.</p>
+            <div class="pub-links">
+              <span class="tag">Deepfake Detection</span>
+              <span class="tag">EfficientNetV2</span>
+              <span class="tag">Digital Trust</span>
+              <span class="tag tag-citations">Citations: 2</span>
+            </div>
+          </div>
+
+          <!-- Publication 14 -->
+          <div class="pub-card glass" data-category="medical" data-citations="1" data-year="2024">
+            <div class="pub-header">
+              <span class="pub-venue">Emerging Research in Computational Science</span>
+              <span class="pub-year">2024</span>
+            </div>
+            <h3 class="pub-title">Enhancing MRI-Based Brain Tumor Classification Accuracy through EfficientNetB3 and Advanced Image Data Augmentation Techniques</h3>
+            <p class="pub-authors">K Vanitha, Dr. Mahesh T. R., AA Thahaseen, B Manivannan, K Anitha, Arastu Thakur</p>
+            <p class="pub-details">Improving CNN training diversity through rotation, scaling, and contrast transformations on standard MRI dataset nodes.</p>
+            <div class="pub-links">
+              <span class="tag">EfficientNetB3</span>
+              <span class="tag">Data Augmentation</span>
+              <span class="tag">MRI Accuracy</span>
+              <span class="tag tag-citations">Citations: 1</span>
+            </div>
+          </div>
+
+          <!-- Publication 15 -->
+          <div class="pub-card glass" data-category="security" data-citations="0" data-year="2025">
+            <div class="pub-header">
+              <span class="pub-venue">Human-Centric Computing and Information Sciences</span>
+              <span class="pub-year">2025</span>
+            </div>
+            <h3 class="pub-title">Enhancing Wearable Activity Recognition through Intelligent IoT for Digital Transformation Using Multimodal Analysis</h3>
+            <p class="pub-authors">Dr. Mahesh T. R., S Bhatia Khan, Arastu Thakur, M Alojail, T Reddy Gadekallu, Z Zhu</p>
+            <p class="pub-details">Evaluating multimodal sensors (accelerometers, gyroscopes) on edge IoT devices using multi-stage neural classifiers.</p>
+            <div class="pub-links">
+              <span class="tag">IoT Sensors</span>
+              <span class="tag">Multimodal AI</span>
+              <span class="tag">Edge Recognition</span>
+              <span class="tag tag-citations">Citations: 0</span>
+            </div>
+          </div>
+
+          <!-- Publication 16 -->
+          <div class="pub-card glass" data-category="medical" data-citations="0" data-year="2024">
+            <div class="pub-header">
+              <span class="pub-venue">Emerging Research in Computational Science</span>
+              <span class="pub-year">2024</span>
+            </div>
+            <h3 class="pub-title">Enhancing Histopathological Image Classification through InceptionResNetV2: A Deep Learning Approach</h3>
+            <p class="pub-authors">Dr. Mahesh T. R., P Shenbagavalli, T Mohanraj, P Amala, K Anitha, Arastu Thakur</p>
+            <p class="pub-details">Deploying combined residual inception blocks to identify tissue anomalies from cellular slide scans.</p>
+            <div class="pub-links">
+              <span class="tag">InceptionResNetV2</span>
+              <span class="tag">Histopathology</span>
+              <span class="tag">Deep Classifiers</span>
+              <span class="tag tag-citations">Citations: 0</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- LINKEDIN EMBED SECTION -->
+    <section class="linkedin-embed-section scroll-offset">
+      <div class="container flex-center">
+        <div class="linkedin-widget-wrapper">
+          <h2 class="section-title text-center">Interactive LinkedIn Node</h2>
+          <p class="section-desc text-center">Establish connection or explore mutual collaborations directly on LinkedIn.</p>
+          
+          <!-- Custom High-Fidelity Interactive LinkedIn Widget -->
+          <div class="linkedin-profile-card glass">
+            <div class="li-banner"></div>
+            <div class="li-content">
+              <div class="li-avatar-row">
+                <div class="li-avatar">
+                  <div class="li-avatar-glow"></div>
+                  <img src="https://github.com/arastuthakur.png" alt="Arastu Thakur" class="li-avatar-img">
+                </div>
+                <div class="li-logo">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="34" height="34" fill="#0077B5"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </div>
+              </div>
+              <div class="li-details">
+                <h3 class="li-name">Arastu Thakur <span class="li-badge">1st</span></h3>
+                <p class="li-headline">AI/ML Engineer at Intel | DevOps & Automation | Generative AI Specialist | Academic Researcher (16 Publications, 620+ Citations)</p>
+                <p class="li-info"><span class="text-muted">Bengaluru, Karnataka, India • </span><a href="https://www.linkedin.com/in/arastu-thakur" target="_blank" class="li-contact-link">Contact info</a></p>
+                
+                <div class="li-experience-preview">
+                  <div class="li-exp-row">
+                    <span class="li-exp-dot"></span>
+                    <p><strong>Intel Corporation</strong> • Data Scientist</p>
+                  </div>
+                  <div class="li-exp-row">
+                    <span class="li-exp-dot"></span>
+                    <p><strong>Jain University</strong> • Bachelor of Technology (CSE)</p>
+                  </div>
+                </div>
+
+                <div class="li-actions">
+                  <a href="https://www.linkedin.com/in/arastu-thakur" target="_blank" class="btn btn-primary btn-sm">
+                    View Profile
+                  </a>
+                  <a href="https://www.linkedin.com/in/arastu-thakur" target="_blank" class="btn btn-outline btn-sm">
+                    Connect
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="skills-section scroll-offset">
+      <div class="container">
+        <h2 class="section-title text-center">Technical Matrix</h2>
+        
+        <div class="skills-container-grid">
+          
+          <!-- Category 1 -->
+          <div class="skills-card glass">
+            <h3>Programming Languages</h3>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span>Python</span>
+                <span>95%</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill progress-cyan" style="width: 95%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span>C++</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill progress-cyan" style="width: 85%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span>SQL (Big Data Analytics)</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill progress-cyan" style="width: 90%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span>Bash / Linux Scripting</span>
+                <span>80%</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill progress-cyan" style="width: 80%"></div></div>
+            </div>
+          </div>
+
+          <!-- Category 2 -->
+          <div class="skills-card glass">
+            <h3>DevOps & Infrastructure</h3>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span>Docker & Containerization</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill progress-purple" style="width: 90%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span>Kubernetes</span>
+                <span>75%</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill progress-purple" style="width: 75%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span>Git, GitLab CLI & CI/CD Pipelines</span>
+                <span>95%</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill progress-purple" style="width: 95%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span>MLflow & MLOps Infrastructure</span>
+                <span>80%</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill progress-purple" style="width: 80%"></div></div>
+            </div>
+          </div>
+
+          <!-- Category 3 -->
+          <div class="skills-card glass">
+            <h3>ML Frameworks</h3>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span>PyTorch</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill progress-green" style="width: 90%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span>TensorFlow / Keras</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill progress-green" style="width: 90%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span>Transformers (HuggingFace)</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill progress-green" style="width: 85%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span>Scikit-learn, XGBoost, LightGBM</span>
+                <span>95%</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill progress-green" style="width: 95%"></div></div>
+            </div>
+          </div>
+
+          <!-- Category 4 -->
+          <div class="skills-card glass">
+            <h3>Generative AI & Software</h3>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span>LangChain & LangGraph (Agents)</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill progress-yellow" style="width: 90%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span>LLMs, QLoRA Fine-tuning</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill progress-yellow" style="width: 85%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span>Vector Databases & Semantic Search</span>
+                <span>85%</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill progress-yellow" style="width: 85%"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info">
+                <span>OOP, REST APIs & Modular Systems</span>
+                <span>90%</span>
+              </div>
+              <div class="skill-bar-bg"><div class="skill-bar-fill progress-yellow" style="width: 90%"></div></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact-section scroll-offset">
+      <div class="container">
+        <h2 class="section-title text-center">Initiate Pipeline Connection</h2>
+        <p class="section-desc text-center">Have a question or looking to build advanced systems together? Send a transmission.</p>
+
+        <div class="contact-grid">
+          <!-- Info Details -->
+          <div class="contact-info-panel glass">
+            <h3>Connection Coordinates</h3>
+            
+            <div class="info-link-row">
+              <div class="info-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </div>
+              <div>
+                <p class="info-label">Email Transmissions</p>
+                <a href="mailto:arustuthakur@gmail.com" class="info-value">arustuthakur@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="info-link-row">
+              <div class="info-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </div>
+              <div>
+                <p class="info-label">Direct Telecom</p>
+                <a href="tel:+919473121221" class="info-value">+91-9473121221</a>
+              </div>
+            </div>
+
+            <div class="info-link-row">
+              <div class="info-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              </div>
+              <div>
+                <p class="info-label">Primary Node Location</p>
+                <p class="info-value text-white">Bengaluru, Karnataka, India</p>
+              </div>
+            </div>
+            
+            <div class="about-terminal-mini">
+              <p class="mini-prompt">&gt; ping -c 1 bengaluru.intel.net</p>
+              <p class="mini-response">64 bytes from blr: icmp_seq=1 ttl=64 time=0.12 ms</p>
+              <p class="mini-response text-green">Connection state: OPTIMAL</p>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form-panel glass">
+            <h3>Send Secure Message</h3>
+            
+            <!-- Simple action to support standard form submissions (can be hooked to Formspree or static handler) -->
+            <form action="https://formspree.io/f/placeholder" method="POST" id="contact-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" name="name" required placeholder="User Name">
+                </div>
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" id="email" name="email" required placeholder="name@company.com">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" required placeholder="Pipeline collaboration / Opportunity">
+              </div>
+              <div class="form-group">
+                <label for="message">Message Body</label>
+                <textarea id="message" name="message" rows="5" required placeholder="Write details here..."></textarea>
+              </div>
+              
+              <button type="submit" class="btn btn-primary w-full">
+                Transmit Packet
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-container">
+      <p class="footer-copy">&copy; 2026 Arastu Thakur. All rights reserved. </p>
+      <div class="footer-links">
+        <a href="https://github.com/arastuthakur" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/arastu-thakur" target="_blank">LinkedIn</a>
+        <a href="https://leetcode.com/u/arustuthakur/" target="_blank">LeetCode</a>
+        <a href="https://www.geeksforgeeks.org/user/arustuthakur/" target="_blank">GeeksforGeeks</a>
+        <a href="https://scholar.google.com/citations?user=Gk71-lQAAAAJ" target="_blank">Scholar</a>
+        <a href="https://orcid.org/0009-0006-4381-5500" target="_blank">ORCID</a>
+      </div>
     </div>
-    <div class="terminal-body" id="terminal-body"></div>
-    <div class="input-line" id="input-line" style="display: none;">
-        <span class="prompt">arastu@intel:~$</span>
-        <input type="text" class="input-field" id="command-input" autocomplete="off" autofocus spellcheck="false">
-    </div>
-</div>
+  </footer>
 
-<script>
-    const terminalBody = document.getElementById('terminal-body');
-    const commandInput = document.getElementById('command-input');
-    const inputLine = document.getElementById('input-line');
-
-    // Deeply researched and expanded data
-const portfolioData = {
-    neofetch: `<span class="ascii-art">
-      █████╗ ██████╗  █████╗ ███████╗████████╗██╗   ██╗
-     ██╔══██╗██╔══██╗██╔══██╗██╔════╝╚══██╔══╝██║   ██║
-     ███████║██████╔╝███████║███████╗   ██║   ██║   ██║
-     ██╔══██║██╔══██╗██╔══██║╚════██║   ██║   ██║   ██║
-     ██║  ██║██║  ██║██║  ██║███████║   ██║   ╚██████╔╝
-     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝   ╚═╝    ╚═════╝
-
-              ████████╗██╗  ██╗ █████╗ ██╗  ██╗██╗   ██╗██████╗
-              ╚══██╔══╝██║  ██║██╔══██╗██║ ██╔╝██║   ██║██╔══██╗
-                 ██║   ███████║███████║█████╔╝ ██║   ██║██████╔╝
-                 ██║   ██╔══██║██╔══██║██╔═██╗ ██║   ██║██╔══██╗
-                 ██║   ██║  ██║██║  ██║██║  ██╗╚██████╔╝██║  ██║
-                 ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝
-
-                         Arastu Thakur
-                 AI Engineer • ML Engineer • Researcher
-</span>
-<div class="neofetch-grid">
-    <span class="neofetch-label">OS</span><span class="neofetch-value">Intel AI Infrastructure (Ubuntu 22.04 LTS)</span>
-    <span class="neofetch-label">Host</span><span class="neofetch-value">Jain University (B.Tech CS, Gold Medalist, GPA: 9.757/10)</span>
-    <span class="neofetch-label">Uptime</span><span class="neofetch-value">1.5+ Years Production ML @ Intel</span>
-    <span class="neofetch-label">Packages</span><span class="neofetch-value"><span class="highlight">Multiple SCIE Publications</span> (Highest IF: 10.9)</span>
-    <span class="neofetch-label">Shell</span><span class="neofetch-value">zsh 5.8.1 (agentic-workflow-theme)</span>
-    <span class="neofetch-label">Scholarship</span><span class="neofetch-value">Full-tuition "Study in India" (Top 5% of 10k+)</span>
-    <span class="neofetch-label">Awards</span><span class="neofetch-value">1st Runner-Up, JAIN x Honeywell Hackathon 2024</span>
-    <span class="neofetch-label">Colors</span><span class="neofetch-value"><span style="color:#f7768e">■</span> <span style="color:#e0af68">■</span> <span style="color:#9ece6a">■</span> <span style="color:#7dcfff">■</span> <span style="color:#bb9af7">■</span></span>
-</div>`,
-
-        about: `<span class="kw">class</span> <span class="func">ArastuThakur</span>(<span class="func">DataScientist</span>, <span class="func">Researcher</span>):
-    <span class="kw">def</span> <span class="func">__init__</span>(self):
-        self.name = <span class="str">"Arastu Thakur"</span>
-        self.current_role = <span class="str">"Data Scientist @ Intel Corporation, Bengaluru"</span>
-        self.specialization = [
-            <span class="str">"Generative AI & Agentic Systems"</span>,
-            <span class="str">"Production ML Engineering & MLOps"</span>,
-            <span class="str">"Deep Learning & Statistical Analytics"</span>
-        ]
-        self.education = <span class="str">"B.Tech Computer Science, Jain (Deemed-to-be) University"</span>
-        self.gpa = <span class="num">9.757</span> <span class="comment"># Gold Medalist</span>
-        self.mission = <span class="str">"Architecting scalable, retrieval-based AI pipelines and multi-agent workflows that bridge the gap between academic research and production-grade engineering."</span>
-        
-    <span class="kw">def</span> <span class="func">get_leadership</span>(self):
-        <span class="kw">return</span> <span class="str">"Microsoft Student Ambassador: Mentoring students in AI and software engineering initiatives."</span>`,
-
-        experience: `<span class="kw">def</span> <span class="func">get_experience</span>(self) -> <span class="kw">list</span>[<span class="kw">dict</span>]:
-    <span class="kw">return</span> [
-        {
-            <span class="str">"role"</span>: <span class="str">"Data Scientist"</span>,
-            <span class="str">"company"</span>: <span class="str">"Intel Corporation, Bengaluru"</span>,
-            <span class="str">"period"</span>: <span class="str">"Jun 2025 – Present"</span>,
-            <span class="str">"impact"</span>: [
-                <span class="str">"Developed AI-driven automation & deep learning-based encoder solutions for defect reduction."</span>,
-                <span class="str">"Achieved ~94% validation accuracy, improving testing efficiency by 10%."</span>,
-                <span class="str">"Built/maintained production ML automation & SQL-based big data analytics systems."</span>,
-                <span class="str">"Supporting 20+ users and processing ~1,000+ queries daily across engineering workflows."</span>
-            ]
-        },
-        {
-            <span class="str">"role"</span>: <span class="str">"Graduate Technical Intern"</span>,
-            <span class="str">"company"</span>: <span class="str">"Intel Corporation, Bengaluru"</span>,
-            <span class="str">"period"</span>: <span class="str">"Jul 2024 – Jun 2025"</span>,
-            <span class="str">"impact"</span>: [
-                <span class="str">"Developed AI-powered automation bots and debugging utilities."</span>,
-                <span class="str">"Reduced repetitive validation efforts by ~30% and improved diagnostics accuracy."</span>,
-                <span class="str">"Migrated and optimized 1,200+ validation test cases."</span>,
-                <span class="str">"Supported SQL-driven big data analytics and reporting pipelines for large-scale validation."</span>
-            ]
-        }
-    ]`,
-
-        research: `<span class="comment"># Academic Footprint: 3+ years of research experience, multiple publications</span>
-<span class="kw">def</span> <span class="func">get_research</span>(self) -> <span class="kw">list</span>[<span class="kw">dict</span>]:
-    <span class="kw">return</span> [
-        {
-            <span class="str">"focus"</span>: <span class="str">"Medical Imaging & Deep Learning"</span>,
-            <span class="str">"detail"</span>: <span class="str">"Published research on brain tumor classification in MRI scans and transformative breast cancer diagnosis using CNNs."</span>,
-            <span class="str">"venues"</span>: [<span class="str">"Frontiers in Computational Neuroscience"</span>, <span class="str">"PMC/SCIE Journals"</span>]
-        },
-        {
-            <span class="str">"focus"</span>: <span class="str">"Advanced Consumer Electronics AI"</span>,
-            <span class="str">"detail"</span>: <span class="str">"Contributor to high-impact research revolutionizing consumer electronics via AI."</span>,
-            <span class="str">"venue"</span>: <span class="str">"IEEE Transactions on Consumer Electronics"</span>,
-            <span class="str">"impact_factor"</span>: <span class="num">10.9</span> <span class="comment"># Highest impact factor publication</span>
-        },
-        {
-            <span class="str">"focus"</span>: <span class="str">"Sustainable Computing"</span>,
-            <span class="str">"detail"</span>: <span class="str">"Research on 'AgriFusion: A Low-Carbon Sustainable Computing' framework."</span>,
-            <span class="str">"venue"</span>: <span class="str">"Wiley (SCIE)"</span>
-        }
-    ]`,
-
-        projects: `<span class="kw">def</span> <span class="func">get_projects</span>(self) -> <span class="kw">list</span>[<span class="kw">dict</span>]:
-    <span class="kw">return</span> [
-        {
-            <span class="str">"name"</span>: <span class="str">"Ever Ready to Release (Intel Internal)"</span>,
-            <span class="str">"stack"</span>: [<span class="str">"Python"</span>, <span class="str">"C++"</span>, <span class="str">"LangChain"</span>, <span class="str">"LLMs"</span>, <span class="str">"Vector DBs"</span>, <span class="str">"MLflow"</span>],
-            <span class="str">"result"</span>: <span class="str">"Architected LLM-powered retrieval workflow mapping code changes to validation test cases. Reduced validation time by 30% and infrastructure usage by ~20%."</span>
-        },
-        {
-            <span class="str">"name"</span>: <span class="str">"AI-Powered Data Analysis & Insights Platform"</span>,
-            <span class="str">"stack"</span>: [<span class="str">"Python"</span>, <span class="str">"Streamlit"</span>, <span class="str">"TensorFlow"</span>, <span class="str">"XGBoost"</span>, <span class="str">"LightGBM"</span>, <span class="str">"Gemini AI"</span>, <span class="str">"Plotly"</span>],
-            <span class="str">"result"</span>: <span class="str">"End-to-end analytics platform integrating ML, DL, and Gemini-powered insight generation for automated EDA, preprocessing, visualization, and hyperparameter optimization."</span>
-        },
-        {
-            <span class="str">"name"</span>: <span class="str">"MRI Image Denoiser"</span>,
-            <span class="str">"stack"</span>: [<span class="str">"TensorFlow"</span>, <span class="str">"Autoencoders"</span>, <span class="str">"Self-Attention Mechanisms"</span>],
-            <span class="str">"result"</span>: <span class="str">"Designed residual autoencoder achieving ~18% PSNR improvement. Optimized inference to <200ms per image for efficient medical deployment."</span>
-        }
-    ]`,
-
-        stack: `<span class="kw">def</span> <span class="func">get_tech_stack</span>(self) -> <span class="kw">str</span>:
-    <span class="kw">return</span> <span class="str">"""
-<span class="tree-line">├──</span> <span class="bold">Languages:</span> Python, C++, SQL
-<span class="tree-line">├──</span> <span class="bold">GenAI & Agentic:</span> LangChain, LangGraph, Multi-Agent Workflows, AI Orchestration, RAG, Embeddings, Vector Search (FAISS, Chroma)
-<span class="tree-line">├──</span> <span class="bold">Deep Learning:</span> PyTorch, TensorFlow, Transformers, Hugging Face, Autoencoders, Attention Mechanisms
-<span class="tree-line">├──</span> <span class="bold">ML & Analytics:</span> Supervised/Unsupervised Learning, Predictive Modeling, Statistical Analysis, Scikit-learn, XGBoost, LightGBM
-<span class="tree-line">├──</span> <span class="bold">MLOps & Systems:</span> Production ML Systems, Model Deployment, Docker, Kubernetes, CI/CD Pipelines, MLflow, REST APIs
-<span class="tree-line">└──</span> <span class="bold">Data Engineering:</span> SQL, Data Processing, Data Cleaning, Feature Engineering, Big Data Analytics
-    """</span>`,
-
-        timeline: `<span class="kw">def</span> <span class="func">get_timeline</span>(self) -> <span class="kw">str</span>:
-    <span class="kw">return</span> <span class="str">"""
-<span class="num">2021</span> <span class="tree-line">│</span> Started B.Tech Computer Science at Jain University.
-<span class="num">2024</span> <span class="tree-line">├──</span> Won 1st Runner-Up at JAIN x Honeywell Hackathon (Fire-Safe Environment).
-<span class="num">2024</span> <span class="tree-line">├──</span> Began Graduate Technical Internship at Intel (Jul 2024).
-<span class="num">2024</span> <span class="tree-line">├──</span> Published multiple SCIE papers (including IEEE Transactions, IF: 10.9).
-<span class="num">2025</span> <span class="tree-line">├──</span> Graduated as <span class="highlight">Gold Medalist</span> (GPA: 9.757/10) with full-tuition "Study in India" Scholarship.
-<span class="num">2025</span> <span class="tree-line">└──</span> Promoted to Data Scientist at Intel (Jun 2025 – Present).
-    """</span>`,
-
-        contact: `<span class="kw">def</span> <span class="func">get_contact</span>(self) -> <span class="kw">dict</span>:
-    <span class="kw">return</span> {
-        <span class="str">"email"</span>: <span class="str">"<a href='mailto:arustuthakur@gmail.com' class='link'>arustuthakur@gmail.com</a>"</span>,
-        <span class="str">"phone"</span>: <span class="str">"+91-9473121221"</span>,
-        <span class="str">"linkedin"</span>: <span class="str">"<a href='https://in.linkedin.com/in/arastuthakur' target='_blank' class='link'>linkedin.com/in/arastuthakur</a>"</span>,
-        <span class="str">"github"</span>: <span class="str">"<a href='https://github.com/arastuthakur' target='_blank' class='link'>github.com/arastuthakur</a>"</span>
-    }`
-    };
-
-    const helpText = `<span class="kw">Available Commands:</span>
-  <span class="func">neofetch</span>    - Display system/profile statistics (Recommended!)
-  <span class="func">about</span>       - Professional summary & background
-  <span class="func">experience</span>  - Detailed work history at Intel Corporation
-  <span class="func">research</span>    - Academic publications & high-impact research
-  <span class="func">projects</span>    - Key ML/GenAI engineering projects & metrics
-  <span class="func">stack</span>       - Visual tree of technical skills & frameworks
-  <span class="func">timeline</span>    - Career and academic progression timeline
-  <span class="func">contact</span>     - Email, LinkedIn, GitHub
-  <span class="func">clear</span>       - Clear the terminal screen
-  <span class="func">sudo</span>        - Attempt privilege escalation
-  <span class="func">exit</span>        - Terminate session`;
-
-    let commandHistory = [];
-    let historyIndex = -1;
-
-    function printLine(html, isCommand = false) {
-        const div = document.createElement('div');
-        div.className = 'output-line';
-        if (isCommand) {
-            div.innerHTML = `<span class="prompt">arastu@intel:~$</span> <span class="command">${html}</span>`;
-        } else {
-            div.innerHTML = html;
-        }
-        terminalBody.appendChild(div);
-        terminalBody.scrollTop = terminalBody.scrollHeight;
-    }
-
-    async function typeBootSequence() {
-        const bootLines = [
-            "BIOS Date: 07/15/2026 14:22:01 Ver 1.0.4",
-            "CPU: Intel(R) Core(TM) i9-14900K @ 6.00GHz",
-            "Detecting primary storage... <span class='str'>[OK]</span>",
-            "Loading Python 3.11.4 environment...",
-            "Importing modules: <span class='func'>torch</span>, <span class='func'>tensorflow</span>, <span class='func'>langchain</span>, <span class='func'>transformers</span>... <span class='str'>[OK]</span>",
-            "Connecting to Intel internal knowledge graph... <span class='str'>[OK]</span>",
-            "Fetching academic records and publication metrics... <span class='str'>[OK]</span>",
-            "Mounting research databases (IEEE, Frontiers, Wiley)... <span class='str'>[OK]</span>",
-            "<span class='highlight'>[SUCCESS]</span> Agentic Portfolio Environment Initialized. Welcome, Arastu."
-        ];
-
-        for (const line of bootLines) {
-            await new Promise(r => setTimeout(r, 300));
-            printLine(`<span class="comment"># ${line}</span>`);
-        }
-        
-        await new Promise(r => setTimeout(r, 500));
-        printLine(portfolioData.neofetch);
-        printLine("\nType '<span class='func'>help</span>' to see available commands.\n");
-        inputLine.style.display = "flex";
-        commandInput.focus();
-    }
-
-    function processCommand(cmd) {
-        const cleanCmd = cmd.trim().toLowerCase();
-        printLine(cleanCmd, true);
-        
-        if (cleanCmd === '') return;
-
-        commandHistory.push(cleanCmd);
-        historyIndex = commandHistory.length;
-
-        switch (cleanCmd) {
-            case 'help':
-                printLine(helpText);
-                break;
-            case 'neofetch':
-                printLine(portfolioData.neofetch);
-                break;
-            case 'about':
-                printLine(portfolioData.about);
-                break;
-            case 'experience':
-                printLine(portfolioData.experience);
-                break;
-            case 'research':
-                printLine(portfolioData.research);
-                break;
-            case 'projects':
-                printLine(portfolioData.projects);
-                break;
-            case 'stack':
-                printLine(portfolioData.stack);
-                break;
-            case 'timeline':
-                printLine(portfolioData.timeline);
-                break;
-            case 'contact':
-                printLine(portfolioData.contact);
-                break;
-            case 'clear':
-                terminalBody.innerHTML = '';
-                break;
-            case 'sudo':
-                printLine(`<span class="error">[ERROR]</span> Permission denied: You are already the root user of this portfolio. Try '<span class="func">contact</span>' instead.`);
-                break;
-            case 'exit':
-                printLine(`<span class="comment">Logging out... Session terminated. (Refresh page to restart)</span>`);
-                inputLine.style.display = "none";
-                break;
-            case 'import antigravity':
-                printLine(`<span class="str">🚀</span> Python easter egg activated! You are now floating through Arastu's multi-agent workflows.`);
-                break;
-            case 'ls':
-                printLine(`<span class="func">about.py</span>  <span class="func">experience.py</span>  <span class="func">research.log</span>  <span class="func">projects/</span>  <span class="func">stack.json</span>  <span class="func">timeline.md</span>  <span class="highlight">README.md</span>`);
-                break;
-            case 'cat readme.md':
-                printLine(`<span class="kw"># Arastu Thakur</span>\nData Scientist specializing in Generative AI, Agentic Systems, and Production ML Engineering.\nCurrently building scalable AI solutions at Intel Corporation.\n\n<span class="highlight">Status:</span> Open to collaborative research and advanced ML engineering roles.`);
-                break;
-            default:
-                printLine(`<span class="error">NameError</span>: name '<span class="str">${cleanCmd}</span>' is not defined. Type '<span class="func">help</span>' for available commands.`);
-        }
-    }
-
-    commandInput.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            const cmd = this.value;
-            this.value = '';
-            processCommand(cmd);
-        } else if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            if (historyIndex > 0) {
-                historyIndex--;
-                this.value = commandHistory[historyIndex];
-            }
-        } else if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            if (historyIndex < commandHistory.length - 1) {
-                historyIndex++;
-                this.value = commandHistory[historyIndex];
-            } else {
-                historyIndex = commandHistory.length;
-                this.value = '';
-            }
-        }
-    });
-
-    document.addEventListener('click', function() {
-        if (inputLine.style.display !== 'none') {
-            commandInput.focus();
-        }
-    });
-
-    window.onload = typeBootSequence;
-</script>
-
+  <!-- Scripts -->
+  <script src="./script.js"></script>
 </body>
 </html>
