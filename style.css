@@ -1704,13 +1704,32 @@ footer {
   .menu-toggle {
     display: flex;
   }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .hero-header-row {
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .hero-avatar {
+    width: 88px;
+    height: 88px;
+  }
   
   .hero-title {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
   
   .hero-subtitle {
-    font-size: 1.05rem;
+    font-size: 0.98rem;
+  }
+
+  .hero-desc {
+    max-width: 36ch;
   }
   
   .metrics-grid {
