@@ -240,8 +240,14 @@ header {
 .hero-grid {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
-  gap: 4rem;
+  gap: 2.5rem;
   align-items: center;
+}
+
+.hero-visual {
+  width: 100%;
+  max-width: 520px;
+  justify-self: end;
 }
 
 .hero-tagline {
