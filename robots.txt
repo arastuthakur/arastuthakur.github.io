@@ -1,0 +1,21 @@
+# Robots.txt for Arastu Thakur's Portfolio & Research Node
+# https://arastuthakur.com.np and https://arastuthakur.github.io
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /resume.html
+Allow: /ArastuThakur.pdf
+Allow: /ArastuThakurResume.docx
+Allow: /profile.jpg
+Allow: /llms.txt
+
+# Crawl-delay for polite indexing
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: https://arastuthakur.github.io/sitemap.xml
+Sitemap: https://arastuthakur.com.np/sitemap.xml
+
+# LLM & AI Agents documentation
+# See /llms.txt for machine-readable context

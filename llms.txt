@@ -1,0 +1,51 @@
+# Arastu Thakur
+
+> AI/ML Engineer and Data Scientist at Intel Corporation. Specializing in Generative AI, Large Language Model (LLM) agents, retrieval-augmented generation (RAG), production MLOps, deep learning pipelines, and validation automation. Gold Medalist with 15+ peer-reviewed scientific publications and 550+ citations.
+
+## Personal Information
+- **Name**: Arastu Thakur
+- **Role**: Data Scientist / AI/ML Engineer
+- **Current Employer**: Intel Corporation (Bengaluru, India)
+- **Email**: arustuthakur@gmail.com
+- **Phone**: +91-9473121221
+- **Location**: Bengaluru, Karnataka, India
+- **Website**: https://arastuthakur.github.io / https://arastuthakur.com.np
+- **LinkedIn**: https://www.linkedin.com/in/arastuthakur/
+- **GitHub**: https://github.com/arastuthakur
+- **Google Scholar**: https://scholar.google.com/citations?user=x01czgsAAAAJ&hl=en
+- **ORCID**: https://orcid.org/0009-0006-4381-5500
+- **LeetCode**: https://leetcode.com/u/arustuthakur/
+
+## Summary of Qualifications
+- **Industry Experience**: 2+ years of industry experience at Intel building production machine learning systems, Generative AI applications, automation solutions, and data-driven engineering workflows.
+- **Academic Credentials**: Bachelor of Technology in Computer Science from Jain (Deemed-to-be) University (Sep 2021 – May 2025). Graduated as **Gold Medalist with a 9.757/10 CGPA**.
+- **Scholarship & Honors**: Full-tuition Study in India Scholarship (Top 5% of 10,000+ applicants), 1st Runner-Up at JAIN x Honeywell Hackathon 2024.
+- **Academic Research**: Over 3 years of research experience resulting in 15 publications with 550+ citations, with the highest impact factor of 10.9 (BMC Medical Imaging, Frontiers in Medicine, IEEE Transactions, Springer SN Computer Science).
+
+## Professional Experience
+### Intel Corporation — Data Scientist (Jun 2025 – Present) | Bengaluru, India
+- Developed AI-driven automation and deep learning-based encoder solutions for defect reduction, achieving ~94% validation accuracy and improving testing efficiency by 10%.
+- Built and maintained production ML automation and SQL-based big data analytics systems supporting 20+ users and processing ~1,000+ queries daily across multiple engineering workflows.
+
+### Intel Corporation — Graduate Technical Intern (Jul 2024 – Jun 2025) | Bengaluru, India
+- Developed AI-powered automation bots and debugging utilities that reduced repetitive validation efforts by ~30% and improved diagnostics accuracy across engineering workflows.
+- Migrated and optimized 1,200+ validation test cases while supporting SQL-driven big data analytics and reporting pipelines for large-scale validation operations.
+
+## Key Projects
+- **Ever Ready to Release (Intel Internal)**: Architected and deployed an LLM-powered retrieval workflow using LangChain to map code changes with relevant validation test cases, reducing validation time by 30% and infrastructure usage by ~20%. Tech: Python, LangChain, LLMs, Vector Databases, C++, MLflow.
+- **AI-Powered Data Analysis & Insights Platform**: End-to-end analytics platform integrating ML, deep learning, and Gemini AI for automated exploratory data analysis. Tech: Python, Streamlit, TensorFlow, Scikit-learn, XGBoost, LightGBM, Gemini AI, Plotly. Repository: https://github.com/arastuthakur/Data-Analysis-Insights-Platform
+- **MRI Image Denoiser**: Residual autoencoder with self-attention mechanisms for MRI image denoising, achieving ~18% PSNR improvement and <200 ms latency. Tech: TensorFlow, Autoencoders, Self-Attention. Repository: https://github.com/arastuthakur/mri-image-denoiser
+- **dibidb**: High-performance, lightweight embedded database engine in Python. Repository: https://github.com/arastuthakur/dibidb
+
+## Core Technical Skills
+- **Languages**: Python, C++, SQL, Bash, Linux, MATLAB
+- **AI & Deep Learning**: PyTorch, TensorFlow, Keras, Transformers, Autoencoders, Self-Attention, Computer Vision
+- **Generative AI**: LangChain, LangGraph, RAG, Embeddings, Vector Databases, Agentic Workflows
+- **Data & Analytics**: SQL, Pandas, NumPy, Data Pipelines, Big Data Analytics
+- **DevOps & MLOps**: MLflow, Docker, Kubernetes, CI/CD, Git, GitLab, GitLab CLI, CMake, Linux
+- **Software Engineering**: Object-Oriented Programming, REST APIs, System Design, Automation
+
+## Resume Downloads
+- **Interactive Web Resume**: https://arastuthakur.github.io/resume.html
+- **Official PDF Resume**: https://arastuthakur.github.io/ArastuThakur.pdf
+- **Official Word (.docx) Resume**: https://arastuthakur.github.io/ArastuThakurResume.docx

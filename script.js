@@ -30,10 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- TYPEWRITER EFFECT ---
   const typewriterText = document.getElementById('typewriter-text');
   const phrases = [
-    'AI/ML Engineer',
-    'DevOps & Automation Engineer',
-    'Generative AI Specialist',
-    '16 Publications & 620+ Citations'
+    'AI/ML Engineer at Intel',
+    'Generative AI & LLM Systems',
+    'Production MLOps & Automation',
+    '15 Publications | 550+ Citations'
   ];
   let phraseIdx = 0;
   let charIdx = 0;
@@ -366,4 +366,183 @@ document.addEventListener('DOMContentLoaded', () => {
     filterAndSortPublications();
   }
 
+  // --- RESUME DROPDOWN TOGGLE ---
+  const resumeMenuWrappers = document.querySelectorAll('.resume-dropdown-wrapper');
+  
+  resumeMenuWrappers.forEach(wrapper => {
+    const trigger = wrapper.querySelector('.resume-dropdown-trigger');
+    if (trigger) {
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = wrapper.classList.contains('active');
+        // Close all first
+        resumeMenuWrappers.forEach(w => w.classList.remove('active'));
+        if (!isOpen) {
+          wrapper.classList.add('active');
+          trigger.setAttribute('aria-expanded', 'true');
+        } else {
+          trigger.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+  });
+
+  // Close dropdown on outside click or escape key
+  document.addEventListener('click', (e) => {
+    resumeMenuWrappers.forEach(w => {
+      if (!w.contains(e.target)) {
+        w.classList.remove('active');
+        const trigger = w.querySelector('.resume-dropdown-trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      resumeMenuWrappers.forEach(w => {
+        w.classList.remove('active');
+        const trigger = w.querySelector('.resume-dropdown-trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
+  // --- TOAST NOTIFICATIONS & COPY TO CLIPBOARD ---
+  let toastTimeout;
+  const showToast = (message) => {
+    let toast = document.getElementById('toast-notice');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'toast-notice';
+      toast.className = 'toast-notice';
+      document.body.appendChild(toast);
+    }
+    toast.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#56d364" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      <span>${message}</span>
+    `;
+    toast.classList.add('show');
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2500);
+  };
+
+  const copyButtons = document.querySelectorAll('[data-copy]');
+  copyButtons.forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const textToCopy = btn.getAttribute('data-copy');
+      const label = btn.getAttribute('data-label') || 'Text';
+      try {
+        await navigator.clipboard.writeText(textToCopy);
+        showToast(`Copied ${label} to clipboard!`);
+      } catch (err) {
+        // Fallback for older browsers
+        const textarea = document.createElement('textarea');
+        textarea.value = textToCopy;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showToast(`Copied ${label} to clipboard!`);
+      }
+    });
+  });
+
+  // --- DYNAMIC INTERACTIVE CUSTOM CURSOR ---
+  const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (isFinePointer && !prefersReducedMotion) {
+    const cursorDot = document.createElement('div');
+    const cursorRing = document.createElement('div');
+    cursorDot.className = 'custom-cursor-dot cursor-hidden';
+    cursorRing.className = 'custom-cursor-ring cursor-hidden';
+    document.body.appendChild(cursorDot);
+    document.body.appendChild(cursorRing);
+
+    let mouseX = -100;
+    let mouseY = -100;
+    let ringX = -100;
+    let ringY = -100;
+    let magneticTarget = null;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.classList.remove('cursor-hidden');
+      cursorRing.classList.remove('cursor-hidden');
+    });
+
+    document.addEventListener('mouseleave', () => {
+      cursorDot.classList.add('cursor-hidden');
+      cursorRing.classList.add('cursor-hidden');
+    });
+
+    document.addEventListener('mouseenter', () => {
+      cursorDot.classList.remove('cursor-hidden');
+      cursorRing.classList.remove('cursor-hidden');
+    });
+
+    document.addEventListener('mousedown', () => {
+      document.body.classList.add('cursor-active');
+    });
+
+    document.addEventListener('mouseup', () => {
+      document.body.classList.remove('cursor-active');
+    });
+
+    // Delegate hover states dynamically
+    document.addEventListener('mouseover', (e) => {
+      const interactive = e.target.closest('a, button, .btn, .social-icon, .filter-btn, .project-filter-btn, .cert-tab-btn, .project-card, .pub-card, .copy-pill-btn, .metric-card, .resume-option-card, [role="button"]');
+      const textInput = e.target.closest('input, textarea');
+
+      if (textInput) {
+        document.body.classList.add('cursor-text');
+        document.body.classList.remove('cursor-hover');
+        magneticTarget = null;
+      } else if (interactive) {
+        document.body.classList.add('cursor-hover');
+        document.body.classList.remove('cursor-text');
+        if (interactive.matches('.social-icon, .copy-pill-btn, .btn-sm')) {
+          magneticTarget = interactive;
+        } else {
+          magneticTarget = null;
+        }
+      } else {
+        document.body.classList.remove('cursor-hover', 'cursor-text');
+        magneticTarget = null;
+      }
+    });
+
+    // Animation loop using translate3d for GPU acceleration
+    const renderCursor = () => {
+      cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+
+      let targetRingX = mouseX;
+      let targetRingY = mouseY;
+
+      if (magneticTarget) {
+        const rect = magneticTarget.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        targetRingX = targetRingX * 0.35 + centerX * 0.65;
+        targetRingY = targetRingY * 0.35 + centerY * 0.65;
+      }
+
+      ringX += (targetRingX - ringX) * 0.22;
+      ringY += (targetRingY - ringY) * 0.22;
+
+      cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
+
+      requestAnimationFrame(renderCursor);
+    };
+
+    requestAnimationFrame(renderCursor);
+  }
+
 });
+
+
