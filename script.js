@@ -366,45 +366,51 @@ document.addEventListener('DOMContentLoaded', () => {
     filterAndSortPublications();
   }
 
-  // --- RESUME DROPDOWN TOGGLE ---
-  const resumeMenuWrappers = document.querySelectorAll('.resume-dropdown-wrapper');
-  
-  resumeMenuWrappers.forEach(wrapper => {
-    const trigger = wrapper.querySelector('.resume-dropdown-trigger');
-    if (trigger) {
-      trigger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isOpen = wrapper.classList.contains('active');
-        // Close all first
-        resumeMenuWrappers.forEach(w => w.classList.remove('active'));
-        if (!isOpen) {
-          wrapper.classList.add('active');
-          trigger.setAttribute('aria-expanded', 'true');
-        } else {
-          trigger.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
-  });
+  // --- RESUME MODAL CONTROLLER ---
+  const resumeModal = document.getElementById('resume-download-modal');
+  const openResumeModalBtn = document.getElementById('open-resume-modal-btn');
+  const closeResumeModalBtn = document.getElementById('close-resume-modal-btn');
 
-  // Close dropdown on outside click or escape key
-  document.addEventListener('click', (e) => {
-    resumeMenuWrappers.forEach(w => {
-      if (!w.contains(e.target)) {
-        w.classList.remove('active');
-        const trigger = w.querySelector('.resume-dropdown-trigger');
-        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+  function openResumeModal() {
+    if (!resumeModal) return;
+    resumeModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if (openResumeModalBtn) openResumeModalBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeResumeModal() {
+    if (!resumeModal) return;
+    resumeModal.classList.remove('open');
+    document.body.style.overflow = '';
+    if (openResumeModalBtn) openResumeModalBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  if (openResumeModalBtn) {
+    openResumeModalBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openResumeModal();
+    });
+  }
+
+  if (closeResumeModalBtn) {
+    closeResumeModalBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeResumeModal();
+    });
+  }
+
+  if (resumeModal) {
+    // Close when clicking backdrop
+    resumeModal.addEventListener('click', (e) => {
+      if (e.target === resumeModal) {
+        closeResumeModal();
       }
     });
-  });
+  }
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      resumeMenuWrappers.forEach(w => {
-        w.classList.remove('active');
-        const trigger = w.querySelector('.resume-dropdown-trigger');
-        if (trigger) trigger.setAttribute('aria-expanded', 'false');
-      });
+    if (e.key === 'Escape' && resumeModal && resumeModal.classList.contains('open')) {
+      closeResumeModal();
     }
   });
 

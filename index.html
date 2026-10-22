@@ -66,7 +66,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Styling -->
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css?v=2.2.0">
 
   <!-- JSON-LD Structured Data for SEO, AEO, and GEO -->
   <script type="application/ld+json">
@@ -196,50 +196,29 @@
             AI/ML Engineer with 2+ years of industry experience at Intel building production machine learning systems, Generative AI applications, validation automation, and data-driven engineering workflows. Gold Medalist with 15 publications and 550+ citations.
           </p>
           <div class="hero-buttons">
-            <!-- Resume Download Dropdown -->
-            <div class="resume-dropdown-wrapper">
-              <button class="btn btn-primary resume-dropdown-trigger" id="resume-menu-btn" aria-haspopup="true" aria-expanded="false" type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                Download Resume
-                <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-              <div class="resume-dropdown-menu" id="resume-menu">
-                <div class="menu-heading">Choose Format</div>
-                <!-- PDF -->
-                <a href="ArastuThakur.pdf" download="Arastu_Thakur_Resume.pdf" class="resume-menu-item" title="Download official PDF resume">
-                  <span class="format-badge pdf">PDF</span>
-                  <div class="format-details">
-                    <span class="format-title">Download PDF</span>
-                    <span class="format-sub">Standard ATS-ready document</span>
-                  </div>
-                  <svg class="format-action-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                </a>
-                <!-- DOCX -->
-                <a href="ArastuThakurResume.docx" download="Arastu_Thakur_Resume.docx" class="resume-menu-item" title="Download Microsoft Word .docx resume">
-                  <span class="format-badge docx">DOCX</span>
-                  <div class="format-details">
-                    <span class="format-title">Download Word (.docx)</span>
-                    <span class="format-sub">Editable recruiter format</span>
-                  </div>
-                  <svg class="format-action-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                </a>
-                <!-- HTML -->
-                <a href="./resume.html" target="_blank" class="resume-menu-item" title="Open print-ready HTML resume in browser">
-                  <span class="format-badge html">HTML</span>
-                  <div class="format-details">
-                    <span class="format-title">View / Print HTML</span>
-                    <span class="format-sub">Interactive web view & 1-click print</span>
-                  </div>
-                  <svg class="format-action-icon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                </a>
-              </div>
-            </div>
-
+            <button class="btn btn-primary" id="open-resume-modal-btn" type="button" aria-haspopup="dialog" aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              Download Resume
+            </button>
             <a href="#contact" class="btn btn-outline">
               Let's Connect
               <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
             <a href="#projects" class="btn btn-outline">Projects</a>
+          </div>
+
+          <!-- Direct 1-Click Format Quickbar -->
+          <div class="hero-resume-quickbar">
+            <span class="quickbar-label">Direct Download:</span>
+            <a href="ArastuThakur.pdf" download="Arastu_Thakur_Resume.pdf" class="format-pill pdf" title="Download official PDF resume (153 KB)">
+              <span class="pill-dot"></span> PDF (153 KB)
+            </a>
+            <a href="ArastuThakurResume.docx" download="Arastu_Thakur_Resume.docx" class="format-pill docx" title="Download Word resume (25 KB)">
+              <span class="pill-dot"></span> Word (.docx)
+            </a>
+            <a href="./resume.html" target="_blank" class="format-pill html" title="Open Interactive Web Resume">
+              <span class="pill-dot"></span> Interactive HTML &nearr;
+            </a>
           </div>
           <div class="hero-socials">
             <a href="https://github.com/arastuthakur" target="_blank" aria-label="GitHub" class="social-icon">
@@ -1555,7 +1534,86 @@ results = pipeline.<span class="code-fn">run</span>(model)
     </div>
   </footer>
 
+  <!-- RESUME DOWNLOAD MODAL -->
+  <div class="resume-modal-overlay" id="resume-download-modal" role="dialog" aria-modal="true" aria-labelledby="resume-modal-title">
+    <div class="resume-modal-container">
+      <div class="resume-modal-header">
+        <div class="resume-modal-title-group">
+          <h3 id="resume-modal-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Select Resume Format
+          </h3>
+          <p>Official verified credentials &bull; Data Scientist &amp; AI Engineer at Intel</p>
+        </div>
+        <button class="resume-modal-close-btn" id="close-resume-modal-btn" aria-label="Close dialog" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="resume-modal-body">
+        <!-- PDF Card -->
+        <div class="modal-option-card">
+          <div class="modal-card-info">
+            <div class="modal-badge-row">
+              <span class="format-badge pdf">PDF</span>
+              <span class="option-meta">153 KB &bull; ATS-Optimized</span>
+            </div>
+            <div class="modal-card-title">Adobe PDF Document</div>
+            <div class="modal-card-desc">Standard high-fidelity vector PDF format optimized for ATS scanners, recruiter screening, and archival.</div>
+          </div>
+          <div class="modal-card-actions">
+            <a href="ArastuThakur.pdf" download="Arastu_Thakur_Resume.pdf" class="btn btn-primary" title="Download official PDF">
+              Download
+            </a>
+            <a href="ArastuThakur.pdf" target="_blank" class="btn btn-outline" title="Preview PDF in new tab">
+              Preview
+            </a>
+          </div>
+        </div>
+
+        <!-- Word DOCX Card -->
+        <div class="modal-option-card">
+          <div class="modal-card-info">
+            <div class="modal-badge-row">
+              <span class="format-badge docx">DOCX</span>
+              <span class="option-meta">25 KB &bull; Fully Editable</span>
+            </div>
+            <div class="modal-card-title">Microsoft Word (.docx)</div>
+            <div class="modal-card-desc">Clean, editable Word document formatted specifically for internal recruiter databases and HR pipelines.</div>
+          </div>
+          <div class="modal-card-actions">
+            <a href="ArastuThakurResume.docx" download="Arastu_Thakur_Resume.docx" class="btn btn-primary" title="Download Word DOCX">
+              Download
+            </a>
+          </div>
+        </div>
+
+        <!-- Interactive HTML Card -->
+        <div class="modal-option-card">
+          <div class="modal-card-info">
+            <div class="modal-badge-row">
+              <span class="format-badge html">HTML</span>
+              <span class="option-meta">Live &bull; Web View &bull; 1-Click Print</span>
+            </div>
+            <div class="modal-card-title">Interactive Web Resume</div>
+            <div class="modal-card-desc">Responsive standalone web resume featuring interactive filtering, verification links, and browser print-to-PDF support.</div>
+          </div>
+          <div class="modal-card-actions">
+            <a href="./resume.html" target="_blank" class="btn btn-primary" title="Open Interactive Web Resume">
+              Open Live
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="resume-modal-footer">
+        <span>Need a tailored dossier or confidential technical profile?</span>
+        <a href="mailto:arustuthakur@gmail.com">Request via Email &rarr;</a>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
-  <script src="./script.js"></script>
+  <script src="./script.js?v=2.2.0"></script>
 </body>
 </html>
