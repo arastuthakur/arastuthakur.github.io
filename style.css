@@ -2252,106 +2252,265 @@ footer {
   }
 }
 
-/* -------------------- DYNAMIC CUSTOM CURSOR SYSTEM -------------------- */
+/* -------------------- WOLF CURSOR FOLLOWER COMPANION SYSTEM -------------------- */
 @media (hover: hover) and (pointer: fine) {
-  .custom-cursor-dot {
+  /* Wolf Companion Element */
+  .wolf-follower {
     position: fixed;
     top: 0;
     left: 0;
-    width: 6px;
-    height: 6px;
-    background-color: #ffffff;
+    width: 86px;
+    height: 60px;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+    opacity: 1;
+    transition: opacity 0.35s ease;
+  }
+
+  .wolf-follower svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 14px rgba(255, 123, 114, 0.22));
+  }
+
+  /* Anatomy Colors */
+  .wf-fur-far { fill: #181d26; }
+  .wf-fur-mid { fill: #242c3b; }
+  .wf-fur-light { fill: #364257; }
+  .wf-fur-ruff { fill: #e6edf3; }
+  .wf-fur-belly { fill: #65738a; }
+  .wf-eye { fill: #ff7b72; filter: drop-shadow(0 0 6px #ff7b72); }
+  .wf-nose { fill: #0d1117; }
+  .wf-ear-inner { fill: #ff7b72; opacity: 0.6; }
+
+  /* Pose Toggling */
+  .wolf-pose-sitting { display: none; }
+  .wolf-pose-standing { display: block; }
+
+  .wolf-follower.state-sitting .wolf-pose-standing { display: none; }
+  .wolf-follower.state-sitting .wolf-pose-sitting { display: block; }
+
+  /* RUNNING STATE ANIMATIONS */
+  .wolf-follower.state-running .wolf-body-group {
+    animation: wolfRunBody 0.32s infinite ease-in-out alternate;
+  }
+  .wolf-follower.state-running .leg-fl {
+    animation: wolfRunLegFrontLeft 0.32s infinite ease-in-out;
+    transform-origin: 65px 36px;
+  }
+  .wolf-follower.state-running .leg-fr {
+    animation: wolfRunLegFrontRight 0.32s infinite ease-in-out;
+    transform-origin: 65px 36px;
+  }
+  .wolf-follower.state-running .leg-bl {
+    animation: wolfRunLegBackLeft 0.32s infinite ease-in-out;
+    transform-origin: 32px 34px;
+  }
+  .wolf-follower.state-running .leg-br {
+    animation: wolfRunLegBackRight 0.32s infinite ease-in-out;
+    transform-origin: 32px 34px;
+  }
+  .wolf-follower.state-running .wolf-tail {
+    animation: wolfRunTail 0.32s infinite ease-in-out alternate;
+    transform-origin: 26px 33px;
+  }
+  .wolf-follower.state-running .wolf-head {
+    animation: wolfRunHead 0.32s infinite ease-in-out alternate;
+    transform-origin: 68px 30px;
+  }
+
+  @keyframes wolfRunBody {
+    0% { transform: translateY(0px) rotate(-1.5deg); }
+    100% { transform: translateY(-4px) rotate(2deg); }
+  }
+  @keyframes wolfRunLegFrontLeft {
+    0% { transform: rotate(38deg); }
+    50% { transform: rotate(-32deg); }
+    100% { transform: rotate(38deg); }
+  }
+  @keyframes wolfRunLegFrontRight {
+    0% { transform: rotate(-32deg); }
+    50% { transform: rotate(38deg); }
+    100% { transform: rotate(-32deg); }
+  }
+  @keyframes wolfRunLegBackLeft {
+    0% { transform: rotate(-38deg); }
+    50% { transform: rotate(32deg); }
+    100% { transform: rotate(-38deg); }
+  }
+  @keyframes wolfRunLegBackRight {
+    0% { transform: rotate(32deg); }
+    50% { transform: rotate(-38deg); }
+    100% { transform: rotate(32deg); }
+  }
+  @keyframes wolfRunTail {
+    0% { transform: rotate(-15deg); }
+    100% { transform: rotate(18deg); }
+  }
+  @keyframes wolfRunHead {
+    0% { transform: rotate(-4deg); }
+    100% { transform: rotate(3deg); }
+  }
+
+  /* WALKING / STALKING STATE ANIMATIONS */
+  .wolf-follower.state-walking .wolf-body-group {
+    animation: wolfWalkBody 0.6s infinite ease-in-out alternate;
+  }
+  .wolf-follower.state-walking .leg-fl {
+    animation: wolfRunLegFrontLeft 0.6s infinite ease-in-out;
+    transform-origin: 65px 36px;
+  }
+  .wolf-follower.state-walking .leg-fr {
+    animation: wolfRunLegFrontRight 0.6s infinite ease-in-out;
+    transform-origin: 65px 36px;
+  }
+  .wolf-follower.state-walking .leg-bl {
+    animation: wolfRunLegBackLeft 0.6s infinite ease-in-out;
+    transform-origin: 32px 34px;
+  }
+  .wolf-follower.state-walking .leg-br {
+    animation: wolfRunLegBackRight 0.6s infinite ease-in-out;
+    transform-origin: 32px 34px;
+  }
+  .wolf-follower.state-walking .wolf-tail {
+    animation: wolfRunTail 0.6s infinite ease-in-out alternate;
+    transform-origin: 26px 33px;
+  }
+  @keyframes wolfWalkBody {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-2px); }
+  }
+
+  /* IDLE STANDING */
+  .wolf-follower.state-idle .wolf-body-group {
+    animation: wolfIdleBreathe 2.6s infinite ease-in-out;
+  }
+  .wolf-follower.state-idle .wolf-tail {
+    animation: wolfIdleTail 2.4s infinite ease-in-out;
+    transform-origin: 26px 33px;
+  }
+  .wolf-follower.state-idle .wolf-head {
+    animation: wolfIdleHead 3.6s infinite ease-in-out;
+    transform-origin: 68px 30px;
+  }
+  @keyframes wolfIdleBreathe {
+    0%, 100% { transform: translateY(0) scaleY(1); }
+    50% { transform: translateY(-1.5px) scaleY(1.02); }
+  }
+  @keyframes wolfIdleTail {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-9deg); }
+  }
+  @keyframes wolfIdleHead {
+    0%, 100% { transform: rotate(0deg); }
+    35% { transform: rotate(2.5deg); }
+    75% { transform: rotate(-2deg); }
+  }
+
+  /* SITTING STATE */
+  .wolf-follower.state-sitting .wolf-pose-sitting {
+    animation: wolfSitBreathe 3s infinite ease-in-out;
+  }
+  @keyframes wolfSitBreathe {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-1px); }
+  }
+
+  /* CLICK / HOWL STATE */
+  .wolf-follower.state-howl .wolf-head {
+    transform: rotate(-32deg) translate(3px, -8px) !important;
+    transform-origin: 68px 30px;
+    transition: transform 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  }
+  .wolf-follower.state-howl .howl-pulse-ring {
+    opacity: 1 !important;
+    animation: howlExpand 0.75s ease-out forwards;
+  }
+  @keyframes howlExpand {
+    0% { transform: translate(88px, 12px) scale(0.3); opacity: 0.9; }
+    100% { transform: translate(105px, -8px) scale(2.2); opacity: 0; }
+  }
+
+  /* Wolf Paw Prints */
+  .wolf-pawprint {
+    position: fixed;
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+    z-index: 99990;
+    transform: translate(-50%, -50%);
+    opacity: 0.42;
+    animation: pawprintFade 1.3s ease-out forwards;
+  }
+  @keyframes pawprintFade {
+    0% { opacity: 0.42; transform: translate(-50%, -50%) scale(1); }
+    60% { opacity: 0.25; }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.85); }
+  }
+
+  /* Precision Cursor Target Reticle */
+  .wolf-cursor-target {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    background-color: #ff7b72;
     border-radius: 50%;
     pointer-events: none;
     z-index: 100000;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 123, 114, 0.5);
-    transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
-                height 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+    box-shadow: 0 0 10px #ff7b72, 0 0 18px rgba(255, 123, 114, 0.4);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
                 background-color 0.2s ease, 
-                opacity 0.2s ease, 
-                transform 0.15s ease;
+                opacity 0.2s ease,
+                box-shadow 0.2s ease;
   }
 
-  .custom-cursor-ring {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 34px;
-    height: 34px;
-    border: 1.5px solid rgba(255, 255, 255, 0.45);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 99999;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 15px rgba(255, 123, 114, 0.15);
-    transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1), 
-                height 0.28s cubic-bezier(0.16, 1, 0.3, 1), 
-                border-color 0.2s ease, 
-                background-color 0.2s ease, 
-                opacity 0.2s ease, 
-                box-shadow 0.2s ease,
-                transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  body.cursor-hover .wolf-cursor-target {
+    transform: translate(-50%, -50%) scale(1.6);
+    background-color: #ffa657;
+    box-shadow: 0 0 14px #ffa657, 0 0 24px rgba(255, 166, 87, 0.5);
   }
 
-  /* Hover State on Interactive Elements */
-  body.cursor-hover .custom-cursor-ring {
-    width: 52px;
-    height: 52px;
-    border-color: #ff7b72;
-    background-color: rgba(255, 123, 114, 0.08);
-    box-shadow: 0 0 25px rgba(255, 123, 114, 0.3);
-  }
-
-  body.cursor-hover .custom-cursor-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #ff7b72;
-    box-shadow: 0 0 14px #ff7b72;
-  }
-
-  /* Hover State on Text Inputs */
-  body.cursor-text .custom-cursor-ring {
+  body.cursor-text .wolf-cursor-target {
     width: 3px;
-    height: 22px;
+    height: 18px;
     border-radius: 2px;
-    border: none;
     background-color: #79c0ff;
-    box-shadow: 0 0 12px rgba(121, 192, 255, 0.6);
+    box-shadow: 0 0 10px rgba(121, 192, 255, 0.6);
   }
 
-  body.cursor-text .custom-cursor-dot {
-    opacity: 0;
-  }
-
-  /* Active / Click Down State */
-  body.cursor-active .custom-cursor-ring {
-    transform: translate(-50%, -50%) scale(0.72);
-    border-color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.22);
-  }
-
-  body.cursor-active .custom-cursor-dot {
-    transform: translate(-50%, -50%) scale(1.5);
+  body.cursor-active .wolf-cursor-target {
+    transform: translate(-50%, -50%) scale(0.7);
     background-color: #ffffff;
+    box-shadow: 0 0 15px #ffffff;
   }
 
   /* Hidden State when cursor leaves window */
   .cursor-hidden {
     opacity: 0 !important;
   }
-}
 
-/* Accessibility: Disable custom cursor when reduced motion is preferred */
-@media (prefers-reduced-motion: reduce) {
+  /* Backwards compatibility */
   .custom-cursor-dot, .custom-cursor-ring {
     display: none !important;
   }
 }
 
-/* On mobile / touch screens, ensure custom cursor is hidden */
+/* Accessibility: Disable wolf companion when reduced motion is preferred */
+@media (prefers-reduced-motion: reduce) {
+  .wolf-follower, .wolf-cursor-target, .wolf-pawprint, .custom-cursor-dot, .custom-cursor-ring {
+    display: none !important;
+  }
+}
+
+/* On mobile / touch screens, ensure wolf companion is hidden */
 @media (pointer: coarse), (hover: none) {
-  .custom-cursor-dot, .custom-cursor-ring {
+  .wolf-follower, .wolf-cursor-target, .wolf-pawprint, .custom-cursor-dot, .custom-cursor-ring {
     display: none !important;
   }
 }

@@ -457,50 +457,179 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // --- DYNAMIC INTERACTIVE CUSTOM CURSOR ---
+  // --- DYNAMIC INTERACTIVE WOLF CURSOR FOLLOWER ---
   const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (isFinePointer && !prefersReducedMotion) {
     const cursorDot = document.createElement('div');
-    const cursorRing = document.createElement('div');
-    cursorDot.className = 'custom-cursor-dot cursor-hidden';
-    cursorRing.className = 'custom-cursor-ring cursor-hidden';
+    cursorDot.className = 'wolf-cursor-target cursor-hidden';
     document.body.appendChild(cursorDot);
-    document.body.appendChild(cursorRing);
+
+    const wolf = document.createElement('div');
+    wolf.className = 'wolf-follower cursor-hidden state-idle';
+    wolf.setAttribute('aria-hidden', 'true');
+    wolf.innerHTML = `
+      <svg viewBox="0 0 110 75">
+        <!-- HOWL EFFECT RINGS -->
+        <g class="howl-pulse-ring" style="opacity: 0; transform-origin: 88px 12px;">
+          <circle cx="0" cy="0" r="8" fill="none" stroke="#ff7b72" stroke-width="2" stroke-dasharray="3,3"/>
+          <circle cx="0" cy="0" r="16" fill="none" stroke="#ffa657" stroke-width="1.2" opacity="0.6"/>
+        </g>
+
+        <!-- POSE 1: STANDING & RUNNING -->
+        <g class="wolf-pose-standing">
+          <!-- Back Far Leg -->
+          <g class="leg-br">
+            <path class="wf-fur-far" d="M30,34 Q24,44 20,54 Q21,58 17,64 L23,64 Q25,58 27,50 Q31,42 34,36 Z"/>
+          </g>
+          <!-- Front Far Leg -->
+          <g class="leg-fr">
+            <path class="wf-fur-far" d="M63,36 Q60,46 59,54 Q57,59 55,64 L61,64 Q63,58 65,52 Q68,44 68,36 Z"/>
+          </g>
+
+          <!-- Tail -->
+          <g class="wolf-tail">
+            <path class="wf-fur-mid" d="M26,33 Q18,36 12,43 Q7,49 4,56 Q7,56 12,50 Q18,46 23,43 Q26,40 28,36 Z"/>
+            <path class="wf-fur-ruff" d="M12,46 Q8,52 4,56 Q9,55 14,49 Z" opacity="0.85"/>
+          </g>
+
+          <!-- Torso & Head -->
+          <g class="wolf-body-group">
+            <path class="wf-fur-mid" d="M26,33 Q36,30 48,31 Q58,32 66,35 Q68,43 65,47 Q52,48 42,44 Q32,44 26,39 Z"/>
+            <path class="wf-fur-belly" d="M38,43 Q48,46 58,45 Q54,42 46,41 Q39,41 38,43 Z" opacity="0.45"/>
+            <path class="wf-fur-ruff" d="M62,34 Q68,38 70,44 Q65,46 62,43 Q65,39 61,36 Z"/>
+
+            <!-- Head -->
+            <g class="wolf-head">
+              <polygon class="wf-fur-far" points="67,24 72,12 75,22"/>
+              <path class="wf-fur-mid" d="M65,30 Q68,22 75,20 Q82,19 90,24 L91,27 Q83,29 78,34 Q70,36 65,30 Z"/>
+              <path class="wf-fur-light" d="M82,21 L93,25 L92,27 L82,28 Z"/>
+              <circle class="wf-nose" cx="92.5" cy="25.5" r="1.3"/>
+              <polygon class="wf-fur-light" points="72,21 78,8 81,19"/>
+              <polygon class="wf-ear-inner" points="74,19 78,11 79,18"/>
+              <path class="wf-fur-ruff" d="M72,25 L75,32 L70,30 L73,34 L67,31 Z"/>
+              <ellipse class="wf-eye" cx="81.5" cy="22" rx="2" ry="1.2" transform="rotate(-10 81.5 22)"/>
+            </g>
+          </g>
+
+          <!-- Back Near Leg -->
+          <g class="leg-bl">
+            <path class="wf-fur-light" d="M33,34 Q28,43 25,52 Q26,57 23,64 L30,64 Q32,57 34,50 Q38,43 40,36 Z"/>
+          </g>
+          <!-- Front Near Leg -->
+          <g class="leg-fl">
+            <path class="wf-fur-light" d="M67,36 Q66,46 67,54 Q67,59 66,64 L73,64 Q73,58 73,52 Q74,44 72,36 Z"/>
+          </g>
+        </g>
+
+        <!-- POSE 2: SITTING (Noble Alert Rest) -->
+        <g class="wolf-pose-sitting">
+          <!-- Tail curled around paws -->
+          <path class="wf-fur-mid" d="M30,58 Q38,62 52,64 Q68,64 74,62 Q76,60 72,59 Q64,60 52,59 Q40,57 32,53 Z"/>
+          <path class="wf-fur-ruff" d="M66,62 Q72,61 74,62 Q71,60 67,59 Z" opacity="0.85"/>
+          <!-- Haunches folded -->
+          <path class="wf-fur-far" d="M26,44 Q20,52 22,62 L32,62 Q34,56 36,50 Z"/>
+          <path class="wf-fur-light" d="M30,42 Q23,50 25,62 L36,62 Q38,54 42,48 Q44,42 36,40 Z"/>
+          <!-- Slanted sitting torso -->
+          <path class="wf-fur-mid" d="M34,42 Q44,34 56,30 Q64,32 68,36 Q67,46 62,54 Q50,56 36,54 Z"/>
+          <!-- Upright front legs -->
+          <path class="wf-fur-far" d="M60,38 L58,62 L64,62 L66,42 Z"/>
+          <path class="wf-fur-light" d="M65,37 L64,62 L70,62 L71,40 Z"/>
+          <!-- Chest ruff -->
+          <path class="wf-fur-ruff" d="M64,32 Q71,38 72,45 Q67,47 64,43 Z"/>
+          <!-- Head held high -->
+          <g class="wolf-head-sit">
+            <polygon class="wf-fur-far" points="67,20 72,8 75,18"/>
+            <path class="wf-fur-mid" d="M65,26 Q68,18 75,16 Q82,15 90,20 L91,23 Q83,25 78,30 Q70,32 65,26 Z"/>
+            <path class="wf-fur-light" d="M82,17 L93,21 L92,23 L82,24 Z"/>
+            <circle class="wf-nose" cx="92.5" cy="21.5" r="1.3"/>
+            <polygon class="wf-fur-light" points="72,17 78,4 81,15"/>
+            <polygon class="wf-ear-inner" points="74,15 78,7 79,14"/>
+            <path class="wf-fur-ruff" d="M72,21 L75,28 L70,26 L73,30 L67,27 Z"/>
+            <ellipse class="wf-eye" cx="81.5" cy="18" rx="2" ry="1.2" transform="rotate(-8 81.5 18)"/>
+          </g>
+        </g>
+      </svg>
+    `;
+    document.body.appendChild(wolf);
 
     let mouseX = -100;
     let mouseY = -100;
-    let ringX = -100;
-    let ringY = -100;
-    let magneticTarget = null;
+    let wolfX = -100;
+    let wolfY = -100;
+    let initialized = false;
+    let facingRight = true;
+    let currentState = 'idle';
+    let idleTicks = 0;
+    let stepDistance = 0;
+    let isHowling = false;
+    let activePawprints = 0;
+    const MAX_PAWPRINTS = 10;
+
+    const pawSvg = `
+      <svg viewBox="0 0 20 20" fill="#ff7b72">
+        <path d="M10,10 C7.5,10 6.2,12.2 7,14.5 C7.7,16.5 9,17.2 10,17.2 C11,17.2 12.3,16.5 13,14.5 C13.8,12.2 12.5,10 10,10 Z"/>
+        <ellipse cx="5" cy="8.5" rx="1.6" ry="2.2" transform="rotate(-25 5 8.5)"/>
+        <ellipse cx="8.3" cy="6" rx="1.6" ry="2.3" transform="rotate(-8 8.3 6)"/>
+        <ellipse cx="11.7" cy="6" rx="1.6" ry="2.3" transform="rotate(8 11.7 6)"/>
+        <ellipse cx="15" cy="8.5" rx="1.6" ry="2.2" transform="rotate(25 15 8.5)"/>
+      </svg>
+    `;
+
+    const spawnPawprint = (x, y, angle) => {
+      if (activePawprints >= MAX_PAWPRINTS) return;
+      activePawprints++;
+      const paw = document.createElement('div');
+      paw.className = 'wolf-pawprint';
+      paw.innerHTML = pawSvg;
+      paw.style.left = `${x}px`;
+      paw.style.top = `${y}px`;
+      paw.style.transform = `translate(-50%, -50%) rotate(${angle}rad)`;
+      document.body.appendChild(paw);
+      setTimeout(() => {
+        paw.remove();
+        activePawprints = Math.max(0, activePawprints - 1);
+      }, 1300);
+    };
 
     window.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
+      if (!initialized) {
+        wolfX = mouseX - 50;
+        wolfY = mouseY + 30;
+        initialized = true;
+      }
       cursorDot.classList.remove('cursor-hidden');
-      cursorRing.classList.remove('cursor-hidden');
+      wolf.classList.remove('cursor-hidden');
     });
 
     document.addEventListener('mouseleave', () => {
       cursorDot.classList.add('cursor-hidden');
-      cursorRing.classList.add('cursor-hidden');
+      wolf.classList.add('cursor-hidden');
     });
 
     document.addEventListener('mouseenter', () => {
       cursorDot.classList.remove('cursor-hidden');
-      cursorRing.classList.remove('cursor-hidden');
+      wolf.classList.remove('cursor-hidden');
     });
 
     document.addEventListener('mousedown', () => {
       document.body.classList.add('cursor-active');
+      isHowling = true;
+      wolf.classList.add('state-howl');
+      setTimeout(() => {
+        isHowling = false;
+        wolf.classList.remove('state-howl');
+      }, 750);
     });
 
     document.addEventListener('mouseup', () => {
       document.body.classList.remove('cursor-active');
     });
 
-    // Delegate hover states dynamically
+    // Delegate hover states dynamically on interactive elements
     document.addEventListener('mouseover', (e) => {
       const interactive = e.target.closest('a, button, .btn, .social-icon, .filter-btn, .project-filter-btn, .cert-tab-btn, .project-card, .pub-card, .copy-pill-btn, .metric-card, .resume-option-card, [role="button"]');
       const textInput = e.target.closest('input, textarea');
@@ -508,45 +637,96 @@ document.addEventListener('DOMContentLoaded', () => {
       if (textInput) {
         document.body.classList.add('cursor-text');
         document.body.classList.remove('cursor-hover');
-        magneticTarget = null;
       } else if (interactive) {
         document.body.classList.add('cursor-hover');
         document.body.classList.remove('cursor-text');
-        if (interactive.matches('.social-icon, .copy-pill-btn, .btn-sm')) {
-          magneticTarget = interactive;
-        } else {
-          magneticTarget = null;
-        }
       } else {
         document.body.classList.remove('cursor-hover', 'cursor-text');
-        magneticTarget = null;
       }
     });
 
-    // Animation loop using translate3d for GPU acceleration
-    const renderCursor = () => {
-      cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
+    // Render loop using requestAnimationFrame
+    const renderWolf = () => {
+      if (initialized) {
+        // Position precision cursor dot
+        cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
 
-      let targetRingX = mouseX;
-      let targetRingY = mouseY;
+        // Calculate following target position (behind/beside the cursor)
+        const targetOffsetX = facingRight ? -45 : 45;
+        const targetOffsetY = 24;
+        const targetX = mouseX + targetOffsetX;
+        const targetY = mouseY + targetOffsetY;
 
-      if (magneticTarget) {
-        const rect = magneticTarget.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        targetRingX = targetRingX * 0.35 + centerX * 0.65;
-        targetRingY = targetRingY * 0.35 + centerY * 0.65;
+        const dx = targetX - wolfX;
+        const dy = targetY - wolfY;
+        const dist = Math.hypot(dx, dy);
+
+        // Smooth responsive follow speed based on distance
+        const followSpeed = dist > 260 ? 0.13 : (dist > 90 ? 0.085 : 0.055);
+        const vx = dx * followSpeed;
+        const vy = dy * followSpeed;
+        const speed = Math.hypot(vx, vy);
+
+        wolfX += vx;
+        wolfY += vy;
+
+        // Facing direction with deadzone to avoid jitter
+        if (dx > 8 && !facingRight) {
+          facingRight = true;
+        } else if (dx < -8 && facingRight) {
+          facingRight = false;
+        }
+
+        // State Machine: running, walking, idle, sitting, howling
+        if (!isHowling) {
+          if (speed > 4.5) {
+            currentState = 'running';
+            idleTicks = 0;
+            stepDistance += speed;
+            if (stepDistance > 42) {
+              stepDistance = 0;
+              spawnPawprint(
+                wolfX + (facingRight ? -12 : 12),
+                wolfY + 22,
+                Math.atan2(vy, vx) + (facingRight ? 0 : Math.PI)
+              );
+            }
+          } else if (speed > 0.8) {
+            currentState = 'walking';
+            idleTicks = 0;
+            stepDistance += speed;
+            if (stepDistance > 55) {
+              stepDistance = 0;
+              spawnPawprint(
+                wolfX + (facingRight ? -8 : 8),
+                wolfY + 22,
+                Math.atan2(vy, vx) + (facingRight ? 0 : Math.PI)
+              );
+            }
+          } else {
+            idleTicks++;
+            if (idleTicks > 190) { // ~3.2s of inactivity
+              currentState = 'sitting';
+            } else {
+              currentState = 'idle';
+            }
+          }
+
+          // Apply state classes
+          wolf.className = `wolf-follower state-${currentState} ${isHowling ? 'state-howl' : ''}`;
+        }
+
+        // Slight tilt based on vertical movement
+        const tilt = Math.max(-12, Math.min(12, vy * 1.4)) * (facingRight ? 1 : -1);
+        const flip = facingRight ? 1 : -1;
+
+        wolf.style.transform = `translate3d(${wolfX}px, ${wolfY}px, 0) translate(-50%, -50%) scaleX(${flip}) rotate(${tilt}deg)`;
       }
 
-      ringX += (targetRingX - ringX) * 0.22;
-      ringY += (targetRingY - ringY) * 0.22;
-
-      cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
-
-      requestAnimationFrame(renderCursor);
+      requestAnimationFrame(renderWolf);
     };
 
-    requestAnimationFrame(renderCursor);
+    requestAnimationFrame(renderWolf);
   }
 
 });
