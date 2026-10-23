@@ -2252,15 +2252,15 @@ footer {
   }
 }
 
-/* -------------------- WOLF CURSOR FOLLOWER COMPANION SYSTEM -------------------- */
+/* -------------------- RAGING ALPHA WOLF CURSOR FOLLOWER SYSTEM -------------------- */
 @media (hover: hover) and (pointer: fine) {
-  /* Wolf Companion Element */
+  /* Raging Wolf Follower Container */
   .wolf-follower {
     position: fixed;
     top: 0;
     left: 0;
-    width: 86px;
-    height: 60px;
+    width: 108px;
+    height: 74px;
     pointer-events: none;
     z-index: 99998;
     transform: translate(-50%, -50%);
@@ -2273,18 +2273,8 @@ footer {
     width: 100%;
     height: 100%;
     overflow: visible;
-    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.65)) drop-shadow(0 0 14px rgba(255, 123, 114, 0.22));
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 16px rgba(255, 42, 68, 0.45));
   }
-
-  /* Anatomy Colors */
-  .wf-fur-far { fill: #181d26; }
-  .wf-fur-mid { fill: #242c3b; }
-  .wf-fur-light { fill: #364257; }
-  .wf-fur-ruff { fill: #e6edf3; }
-  .wf-fur-belly { fill: #65738a; }
-  .wf-eye { fill: #ff7b72; filter: drop-shadow(0 0 6px #ff7b72); }
-  .wf-nose { fill: #0d1117; }
-  .wf-ear-inner { fill: #ff7b72; opacity: 0.6; }
 
   /* Pose Toggling */
   .wolf-pose-sitting { display: none; }
@@ -2293,162 +2283,163 @@ footer {
   .wolf-follower.state-sitting .wolf-pose-standing { display: none; }
   .wolf-follower.state-sitting .wolf-pose-sitting { display: block; }
 
-  /* RUNNING STATE ANIMATIONS */
+  /* SPRINT / CHARGE (Furious, aggressive gallop) */
   .wolf-follower.state-running .wolf-body-group {
-    animation: wolfRunBody 0.32s infinite ease-in-out alternate;
+    animation: rageSprintBody 0.28s infinite ease-in-out alternate;
   }
   .wolf-follower.state-running .leg-fl {
-    animation: wolfRunLegFrontLeft 0.32s infinite ease-in-out;
-    transform-origin: 65px 36px;
+    animation: rageSprintLegFL 0.28s infinite ease-in-out;
+    transform-origin: 82px 46px;
   }
   .wolf-follower.state-running .leg-fr {
-    animation: wolfRunLegFrontRight 0.32s infinite ease-in-out;
-    transform-origin: 65px 36px;
+    animation: rageSprintLegFR 0.28s infinite ease-in-out;
+    transform-origin: 78px 46px;
   }
   .wolf-follower.state-running .leg-bl {
-    animation: wolfRunLegBackLeft 0.32s infinite ease-in-out;
-    transform-origin: 32px 34px;
+    animation: rageSprintLegBL 0.28s infinite ease-in-out;
+    transform-origin: 42px 42px;
   }
   .wolf-follower.state-running .leg-br {
-    animation: wolfRunLegBackRight 0.32s infinite ease-in-out;
-    transform-origin: 32px 34px;
+    animation: rageSprintLegBR 0.28s infinite ease-in-out;
+    transform-origin: 38px 44px;
   }
   .wolf-follower.state-running .wolf-tail {
-    animation: wolfRunTail 0.32s infinite ease-in-out alternate;
-    transform-origin: 26px 33px;
+    animation: rageSprintTail 0.28s infinite ease-in-out alternate;
+    transform-origin: 32px 42px;
   }
   .wolf-follower.state-running .wolf-head {
-    animation: wolfRunHead 0.32s infinite ease-in-out alternate;
-    transform-origin: 68px 30px;
+    animation: rageSprintHead 0.28s infinite ease-in-out alternate;
+    transform-origin: 82px 30px;
   }
 
-  @keyframes wolfRunBody {
-    0% { transform: translateY(0px) rotate(-1.5deg); }
-    100% { transform: translateY(-4px) rotate(2deg); }
+  @keyframes rageSprintBody {
+    0% { transform: translateY(0px) rotate(-3deg); }
+    100% { transform: translateY(-5px) rotate(3deg); }
   }
-  @keyframes wolfRunLegFrontLeft {
-    0% { transform: rotate(38deg); }
-    50% { transform: rotate(-32deg); }
-    100% { transform: rotate(38deg); }
+  @keyframes rageSprintLegFL {
+    0% { transform: rotate(45deg); }
+    50% { transform: rotate(-38deg); }
+    100% { transform: rotate(45deg); }
   }
-  @keyframes wolfRunLegFrontRight {
-    0% { transform: rotate(-32deg); }
-    50% { transform: rotate(38deg); }
-    100% { transform: rotate(-32deg); }
-  }
-  @keyframes wolfRunLegBackLeft {
+  @keyframes rageSprintLegFR {
     0% { transform: rotate(-38deg); }
-    50% { transform: rotate(32deg); }
+    50% { transform: rotate(45deg); }
     100% { transform: rotate(-38deg); }
   }
-  @keyframes wolfRunLegBackRight {
-    0% { transform: rotate(32deg); }
-    50% { transform: rotate(-38deg); }
-    100% { transform: rotate(32deg); }
+  @keyframes rageSprintLegBL {
+    0% { transform: rotate(-45deg); }
+    50% { transform: rotate(38deg); }
+    100% { transform: rotate(-45deg); }
   }
-  @keyframes wolfRunTail {
-    0% { transform: rotate(-15deg); }
-    100% { transform: rotate(18deg); }
+  @keyframes rageSprintLegBR {
+    0% { transform: rotate(38deg); }
+    50% { transform: rotate(-45deg); }
+    100% { transform: rotate(38deg); }
   }
-  @keyframes wolfRunHead {
-    0% { transform: rotate(-4deg); }
-    100% { transform: rotate(3deg); }
+  @keyframes rageSprintTail {
+    0% { transform: rotate(-18deg) scaleY(1.1); }
+    100% { transform: rotate(22deg) scaleY(0.9); }
+  }
+  @keyframes rageSprintHead {
+    0% { transform: translateY(-2px) rotate(-6deg); }
+    100% { transform: translateY(2px) rotate(4deg); }
   }
 
-  /* WALKING / STALKING STATE ANIMATIONS */
+  /* PROWLING / STALKING GAIT */
   .wolf-follower.state-walking .wolf-body-group {
-    animation: wolfWalkBody 0.6s infinite ease-in-out alternate;
+    animation: rageProwlBody 0.55s infinite ease-in-out alternate;
   }
   .wolf-follower.state-walking .leg-fl {
-    animation: wolfRunLegFrontLeft 0.6s infinite ease-in-out;
-    transform-origin: 65px 36px;
+    animation: rageSprintLegFL 0.55s infinite ease-in-out;
+    transform-origin: 82px 46px;
   }
   .wolf-follower.state-walking .leg-fr {
-    animation: wolfRunLegFrontRight 0.6s infinite ease-in-out;
-    transform-origin: 65px 36px;
+    animation: rageSprintLegFR 0.55s infinite ease-in-out;
+    transform-origin: 78px 46px;
   }
   .wolf-follower.state-walking .leg-bl {
-    animation: wolfRunLegBackLeft 0.6s infinite ease-in-out;
-    transform-origin: 32px 34px;
+    animation: rageSprintLegBL 0.55s infinite ease-in-out;
+    transform-origin: 42px 42px;
   }
   .wolf-follower.state-walking .leg-br {
-    animation: wolfRunLegBackRight 0.6s infinite ease-in-out;
-    transform-origin: 32px 34px;
+    animation: rageSprintLegBR 0.55s infinite ease-in-out;
+    transform-origin: 38px 44px;
   }
   .wolf-follower.state-walking .wolf-tail {
-    animation: wolfRunTail 0.6s infinite ease-in-out alternate;
-    transform-origin: 26px 33px;
+    animation: rageSprintTail 0.55s infinite ease-in-out alternate;
+    transform-origin: 32px 42px;
   }
-  @keyframes wolfWalkBody {
-    0% { transform: translateY(0px); }
-    100% { transform: translateY(-2px); }
+  @keyframes rageProwlBody {
+    0% { transform: translateY(0px) rotate(-1deg); }
+    100% { transform: translateY(-2px) rotate(1deg); }
   }
 
-  /* IDLE STANDING */
+  /* IDLE (Tense, Menacing Stalking Breath) */
   .wolf-follower.state-idle .wolf-body-group {
-    animation: wolfIdleBreathe 2.6s infinite ease-in-out;
+    animation: rageIdleBreathe 2s infinite ease-in-out;
   }
   .wolf-follower.state-idle .wolf-tail {
-    animation: wolfIdleTail 2.4s infinite ease-in-out;
-    transform-origin: 26px 33px;
+    animation: rageIdleTail 1.8s infinite ease-in-out;
+    transform-origin: 32px 42px;
   }
   .wolf-follower.state-idle .wolf-head {
-    animation: wolfIdleHead 3.6s infinite ease-in-out;
-    transform-origin: 68px 30px;
+    animation: rageIdleHead 3s infinite ease-in-out;
+    transform-origin: 82px 30px;
   }
-  @keyframes wolfIdleBreathe {
+  @keyframes rageIdleBreathe {
     0%, 100% { transform: translateY(0) scaleY(1); }
-    50% { transform: translateY(-1.5px) scaleY(1.02); }
+    50% { transform: translateY(-2px) scaleY(1.03); }
   }
-  @keyframes wolfIdleTail {
+  @keyframes rageIdleTail {
     0%, 100% { transform: rotate(0deg); }
-    50% { transform: rotate(-9deg); }
+    50% { transform: rotate(-12deg); }
   }
-  @keyframes wolfIdleHead {
+  @keyframes rageIdleHead {
     0%, 100% { transform: rotate(0deg); }
-    35% { transform: rotate(2.5deg); }
+    35% { transform: rotate(3deg); }
     75% { transform: rotate(-2deg); }
   }
 
-  /* SITTING STATE */
+  /* SITTING (Dominant Predator Alpha Rest) */
   .wolf-follower.state-sitting .wolf-pose-sitting {
-    animation: wolfSitBreathe 3s infinite ease-in-out;
+    animation: rageSitBreathe 2.8s infinite ease-in-out;
   }
-  @keyframes wolfSitBreathe {
+  @keyframes rageSitBreathe {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-1px); }
+    50% { transform: translateY(-1.5px); }
   }
 
-  /* CLICK / HOWL STATE */
+  /* SAVAGE ROAR / ATTACK CLICK STATE */
   .wolf-follower.state-howl .wolf-head {
-    transform: rotate(-32deg) translate(3px, -8px) !important;
-    transform-origin: 68px 30px;
-    transition: transform 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    transform: rotate(-35deg) translate(5px, -10px) !important;
+    transform-origin: 82px 30px;
+    transition: transform 0.18s cubic-bezier(0.18, 0.89, 0.32, 1.28);
   }
   .wolf-follower.state-howl .howl-pulse-ring {
     opacity: 1 !important;
-    animation: howlExpand 0.75s ease-out forwards;
+    animation: rageRoarShockwave 0.7s ease-out forwards;
   }
-  @keyframes howlExpand {
-    0% { transform: translate(88px, 12px) scale(0.3); opacity: 0.9; }
-    100% { transform: translate(105px, -8px) scale(2.2); opacity: 0; }
+  @keyframes rageRoarShockwave {
+    0% { transform: translate(118px, 22px) scale(0.2); opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { transform: translate(145px, 5px) scale(2.8); opacity: 0; }
   }
 
-  /* Wolf Paw Prints */
+  /* Savage Wolf Paw Prints with Claws */
   .wolf-pawprint {
     position: fixed;
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     pointer-events: none;
     z-index: 99990;
     transform: translate(-50%, -50%);
-    opacity: 0.42;
-    animation: pawprintFade 1.3s ease-out forwards;
+    opacity: 0.52;
+    animation: pawprintFade 1.2s ease-out forwards;
   }
   @keyframes pawprintFade {
-    0% { opacity: 0.42; transform: translate(-50%, -50%) scale(1); }
-    60% { opacity: 0.25; }
-    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.85); }
+    0% { opacity: 0.55; transform: translate(-50%, -50%) scale(1); }
+    70% { opacity: 0.3; }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
   }
 
   /* Precision Cursor Target Reticle */
@@ -2458,12 +2449,12 @@ footer {
     left: 0;
     width: 7px;
     height: 7px;
-    background-color: #ff7b72;
+    background-color: #ff2a4b;
     border-radius: 50%;
     pointer-events: none;
     z-index: 100000;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 10px #ff7b72, 0 0 18px rgba(255, 123, 114, 0.4);
+    box-shadow: 0 0 10px #ff2a4b, 0 0 20px rgba(255, 42, 75, 0.6);
     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
                 background-color 0.2s ease, 
                 opacity 0.2s ease,
